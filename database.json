@@ -1,0 +1,30 @@
+{
+    "collection1": [
+        {
+            "id": "c1-r1",
+            "title": "Collection 1 first"
+        },
+        {
+            "id": "c1-r2",
+            "title": "Collection 1 second"
+        },
+        {
+            "id": "c1-r3",
+            "title": "Collection 1 third"
+        }
+    ],
+    "collection2": [
+        {
+            "id": "c2-r1",
+            "title": "Collection 2 first"
+        },
+        {
+            "id": "c2-r2",
+            "title": "Collection 2 second"
+        },
+        {
+            "id": "c2-r3",
+            "title": "Collection 2 third"
+        }
+    ]
+}
