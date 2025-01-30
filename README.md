@@ -26,6 +26,8 @@ Open your browser on http://localhost:5173 (or other port) in order to be able t
 
 There is a default database showing the expected base structure.
 
+![Screenshot of the JSON editor](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/static/doc/editor.png?raw=true)
+
 Resources are stored in collections (JSON array) and uniquely identified by the property "id" which you should use to GET, PUT and DELETE specific resources.
 
 You can create new collections using the browser graphical interface only, creating new collections trough REST API is not possible using the template.
@@ -34,6 +36,8 @@ You can create new collections using the browser graphical interface only, creat
 ## REST API
 
 REST endpoints are exposed by http://localhost:5173/api.
+
+![REST API in action as documented in this README](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/static/doc/api.png?raw=true)
 
 Feel free to update the code to add more endpoints and fit your own needs, the template only supports [basic features of REST APIs](https://restfulapi.net/resource-naming/) excepted subcollections.
 
