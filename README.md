@@ -86,7 +86,7 @@ The following features will be developped based on another project's needs but p
 
 - [x] Persistant dataset
 - [x] REST API
-- [ ] Frontend preview
+- [x] Frontend preview
 - [ ] Multiple datasets support
 - [ ] Multiple frontends support
 - [ ] Connect to a production app for in context preview

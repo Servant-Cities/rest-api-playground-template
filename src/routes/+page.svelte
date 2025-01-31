@@ -27,7 +27,7 @@
 				REST API
 			</li>
 			<li class={featureClasses}>
-				<Bookmark aria-label="To be done" />
+				<BookmarkCheck aria-label="done" />
 				Frontend preview
 			</li>
 			<li class={featureClasses}>
