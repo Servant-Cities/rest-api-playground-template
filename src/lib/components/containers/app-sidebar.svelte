@@ -1,15 +1,20 @@
 <script lang="ts">
-	import Database from 'lucide-svelte/icons/Database';
+	import Database from 'lucide-svelte/icons/database';
+	import MonitorCheck from 'lucide-svelte/icons/monitor-check';
 	import Settings from 'lucide-svelte/icons/settings';
 	import { page } from '$app/state';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
-	// Menu items.
 	const items = [
 		{
 			title: 'Database',
 			url: '/database',
 			icon: Database
+		},
+		{
+			title: 'Preview',
+			url: '/preview',
+			icon: MonitorCheck
 		},
 		{
 			title: 'Settings',

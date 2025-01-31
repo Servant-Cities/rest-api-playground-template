@@ -86,7 +86,7 @@ It is eventually up to you to use any typing and validation solution you like an
 
 ## Features and Roadmap
 
-The following features will be developped based on another project's needs but please let me know if would like some more work done on this template.
+The following features will be developped based on another project's needs but please let me know if you would like some more work done on this template.
 
 - [x] Persistant dataset
 - [x] REST API

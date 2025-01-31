@@ -826,16 +826,16 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.3.0.tgz#f6e14a97858d327252200242d4ccfe522c445522"
   integrity sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==
 
-bits-ui@^1.0.0-next.79:
-  version "1.0.0-next.79"
-  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-1.0.0-next.79.tgz#7c62e280447e19730f28c69ab211ba92a273e30e"
-  integrity sha512-k8cLe5LTTpssBJJ3VdRl9fHa9BFKZAe01xZ/jT3CZArgbq+XqOiQBvhPXwMYV/SKK3EvaOl7lxw13GI61tGxHA==
+bits-ui@^1.0.0-next.82:
+  version "1.0.0-next.82"
+  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-1.0.0-next.82.tgz#3e665df066925ed692e19214ada8952fdcf59319"
+  integrity sha512-h8Rtv577qLLEsRJgXVWwOvPZf+aqEqmlhjIJsWVPbQPkosRt3FMf+XV1S8LZ6NomFgbqH5e9CIoMt81I/XD53Q==
   dependencies:
     "@floating-ui/core" "^1.6.4"
     "@floating-ui/dom" "^1.6.7"
     "@internationalized/date" "^3.5.6"
     esm-env "^1.1.2"
-    runed "^0.23.1"
+    runed "^0.23.2"
     svelte-toolbelt "^0.7.0"
 
 brace-expansion@^1.1.7:
@@ -2023,10 +2023,10 @@ runed@^0.20.0:
   dependencies:
     esm-env "^1.0.0"
 
-runed@^0.23.1:
-  version "0.23.1"
-  resolved "https://registry.yarnpkg.com/runed/-/runed-0.23.1.tgz#a6fdfdea17e0845d9f18859d097db3a62b4d53e3"
-  integrity sha512-h1ZDmin0LBoSMEZxvHOJbCWsUBz4099cjI+/rQ4FZystgOq294s5Rh+OEeu9HIObc8XQQEya23eAhJeal0VBuA==
+runed@^0.23.2:
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/runed/-/runed-0.23.2.tgz#7cd14075e4c3c831b0f19ef9a7b23f16fb885a69"
+  integrity sha512-AhHCb5/B+YQW6ar1pzhGQOQy+byfjCH63ofuhrexSWwQKhC0EbQ60Z/wMYwETLo3ZubhwlNryxBt0seOMOrVFQ==
   dependencies:
     esm-env "^1.0.0"
 

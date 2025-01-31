@@ -19,7 +19,6 @@
 	<Form.Field {form} name="body">
 		<Form.Control>
 			{#snippet children({ props })}
-				<Form.Label>JSON data</Form.Label>
 				<Textarea {...props} bind:value={$formData.body} class="h-[70vh] bg-primary text-primary-foreground"/>
 			{/snippet}
 		</Form.Control>
