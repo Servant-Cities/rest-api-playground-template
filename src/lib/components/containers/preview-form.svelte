@@ -2,7 +2,9 @@
 	import { page } from '$app/state';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Alert from '$lib/components/ui/alert/index.js';
 
+	const apiDocUrl = `${page.url.protocol}//${page.url.host}/api`;
 	const defaultPreviewURL = `${page.url.protocol}//${page.url.host}/database`;
 	let urlInput = $state(defaultPreviewURL);
 	let previewURL = $state(defaultPreviewURL);
@@ -23,3 +25,12 @@
 		<iframe title="preview" class="h-full w-full" src={previewURL}></iframe>
 	{/if}
 </form>
+<Alert.Root class="mt-2">
+	<Alert.Title>How do I load data in my app ?</Alert.Title>
+	<Alert.Description>
+		You can connect the app you want to preview with the database using
+		<a href={apiDocUrl} class="font-medium text-secondary-foreground underline">
+			the REST API
+		</a>
+	</Alert.Description>
+</Alert.Root>

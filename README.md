@@ -35,15 +35,9 @@ You can create new collections using the browser graphical interface only, creat
 
 ## REST API
 
-REST endpoints are exposed by http://localhost:5173/api.
-
 ![REST API in action as documented in this README](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/static/doc/api.png?raw=true)
 
-Feel free to update the code to add more endpoints and fit your own needs, the template only supports [basic features of REST APIs](https://restfulapi.net/resource-naming/) excepted subcollections.
-
-eg: You can use any HTTP method of "/api/collection/uuid" but that is the only indentation level available in the template and "/api/collection/uuid/array-value" won't work.
-
-Search params are not supported either.
+REST endpoints are exposed by http://localhost:5173/api.
 
 There are two endpoints with 3 different methods each:
 
@@ -60,11 +54,13 @@ PUT: overides the resource with new data if it exists
 DELETE: permanently delete the resource if it exists
 ```
 
-PUT and POST methods expect the request body to include the resource's data in JSON format.
-
-Using PUT method: 
-- be aware it is technicaly possible to overide the id, which you should normaly avoid, 
+Please be aware:
+- Search params are not supported.
+- PUT and POST methods expect JSON format
+- It is technicaly possible to overide a resource's id, which you should normaly avoid
 - creating resources using PUT is not supported
+
+Feel free to update the code of your playground to add more endpoints and fit your own needs.
 
 ## GIT
 
