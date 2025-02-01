@@ -14,7 +14,7 @@
 	<Card.Content>
 		<p class="my-3"></p>
 		<Alert.Root class="my-3">
-			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/[collection-name]`}</Alert.Title>
+			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/REST/[collection-name]`}</Alert.Title>
 			<Alert.Description>
 				<ul>
 					<li>GET: loads the collection array</li>
@@ -24,7 +24,7 @@
 			</Alert.Description>
 		</Alert.Root>
 		<Alert.Root class="my-3">
-			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/[collection-name]/[resource-id]`}</Alert.Title>
+			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/REST/[collection-name]/[resource-id]`}</Alert.Title>
 			<Alert.Description>
 				<ul>
 					<li>GET: loads the resource if it exists</li>

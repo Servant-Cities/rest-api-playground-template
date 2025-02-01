@@ -42,13 +42,13 @@ REST endpoints are exposed by http://localhost:5173/api.
 There are two endpoints with 3 different methods each:
 
 ```
-/api/[collection-name]
+/api/REST/[collection-name]
 GET: loads the collection array
 POST: pushes a new resource in the collection array
 DELETE: permanently delete the collection
 ```
 ```
-/api/[collection-name]/[resource-id]
+/api/REST/[collection-name]/[resource-id]
 GET: loads the resource if it exists
 PUT: overides the resource with new data if it exists
 DELETE: permanently delete the resource if it exists

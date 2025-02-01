@@ -1,0 +1,36 @@
+<script lang="ts">
+	import {
+		addDatabaseProperty,
+		updateDatabaseProperty,
+		deleteDatabaseProperty
+	} from '$lib/databaseUtils.ts';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import { Badge } from '$lib/components/ui/badge/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import type { DatasetSchema } from '$lib/schema';
+
+	let { name, dataset }: { name: string; dataset: DatasetSchema } = $props();
+	const use = async () => updateDatabaseProperty('application-settings/active-dataset/value', name);
+	const toggleHidden = async () =>
+		dataset.hidden
+			? deleteDatabaseProperty(`${name}/hidden`)
+			: addDatabaseProperty(`${name}/hidden`, 'User asked to hide trough UI');
+</script>
+
+<li class="my-4 flex w-full font-mono">
+	<div class="mr-2 flex flex-col gap-2">
+		<Button variant="outline" onclick={use}>Use</Button>
+		<Button variant="outline" onclick={toggleHidden}>{dataset.hidden ? 'Show' : 'Hide'}</Button>
+	</div>
+	<span class="flex w-full items-center justify-between rounded-md border px-4 py-3">
+		{name}
+		<span class="flex items-center">
+			{#if dataset.hidden}
+				<Badge class="mr-4 text-sm">Hidden</Badge>
+			{/if}
+			<Avatar.Root>
+				<Avatar.Fallback>{Object.keys(dataset).length - (dataset.hidden ? 1 : 0)}</Avatar.Fallback>
+			</Avatar.Root>
+		</span>
+	</span>
+</li>
