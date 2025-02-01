@@ -70,9 +70,11 @@ While this template is very agnostic, the expected adaptation of the template is
 
 ## Typing
 
-There is an exemple of how you can use [zod](https://zod.dev/) and [superforms](https://superforms.rocks/) to type your datasets in /src/lib/schema.ts.
+There is an exemple of how you can use [zod](https://zod.dev/) and [superforms](https://superforms.rocks/) to type your datasets in [/src/lib/schema.ts](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/lib/schema.ts).
 
-You will find there an practical example with the application settings schema and a generic dataset schema currently used to validate the data before overiding the database.
+![Screenshot of the JSON editor with typing errors](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/static/doc/typing.png?raw=true)
+
+You will find there a practical example with the application settings schema and a generic dataset schema currently used to validate the data before overiding the database.
 
 You can then use the supervalidate function to type the data in you endpoints.
 
