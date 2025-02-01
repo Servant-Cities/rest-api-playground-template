@@ -1,30 +1,69 @@
 {
-    "collection1": [
-        {
-            "id": "c1-r1",
-            "title": "Collection 1 first"
-        },
-        {
-            "id": "c1-r2",
-            "title": "Collection 1 second"
-        },
-        {
-            "id": "c1-r3",
-            "title": "Collection 1 third"
+    "dataset-1": {
+        "collection-1": [
+            {
+                "id": "You can write any id you like as long as it is unique in the collection.",
+                "title": "Collection 1 first"
+            },
+            {
+                "id": "Creating resources trough the REST API will use an uuid v4 by default",
+                "title": "Collection 1 second"
+            },
+            {
+                "id": "Avoid special characters in ids",
+                "title": "Collection 1 third"
+            }
+        ],
+        "collection-2": [
+            {
+                "id": "You can have multiple collection in a dataset.",
+                "title": "Collection 2 first"
+            },
+            {
+                "id": "A collection correspond to a model but is not strongly typed yet",
+                "title": "Collection 2 second"
+            },
+            {
+                "id": "You can type your collections by updating zod validators in the project",
+                "title": "Collection 2 third"
+            }
+        ]
+    },
+    "dataset-2": {
+        "collection-1": [
+            {
+                "id": "You can set multiple datasets with any kind of collections you like",
+                "title": "Collection 1 first"
+            }
+        ],
+        "collection-2": [
+            {
+                "id": "You'll be able to test each dataset separately on your apps",
+                "title": "Collection 2 first"
+            },
+            {
+                "id": "Two datasets with the same models correspond to different use cases of one app",
+                "title": "Collection 2 second"
+            },
+            {
+                "id": "Two datasets with different models can be used if you are testing different app or a data driven one",
+                "title": "Collection 2 third",
+                "something-different": "The database supports it as long as you don't prevent it in the zod validator"
+            }
+        ]
+    },
+    "dataset-with-a-name": {
+        "collection-with-a-name": {
+            "id": "You can indeed rename anything you want in your datasets",
+            "title": "Example 1"
         }
-    ],
-    "collection2": [
-        {
-            "id": "c2-r1",
-            "title": "Collection 2 first"
-        },
-        {
-            "id": "c2-r2",
-            "title": "Collection 2 second"
-        },
-        {
-            "id": "c2-r3",
-            "title": "Collection 2 third"
+    },
+    "application-settings": {
+        "description": "This is required by the app, do not delete, but feel free to update the values",
+        "hidden": "You can set this property to a non falsy value in any dataset to hide it from the options",
+        "active-dataset": {
+            "description": "Which dataset to use in previews and by the REST API",
+            "value": "dataset-1"
         }
-    ]
+    }
 }
