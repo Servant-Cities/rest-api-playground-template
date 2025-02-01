@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Database from 'lucide-svelte/icons/database';
+	import ClipboardList from 'lucide-svelte/icons/clipboard-list';
+	import Library from 'lucide-svelte/icons/library';
 	import MonitorCheck from 'lucide-svelte/icons/monitor-check';
 	import CloudDownload from 'lucide-svelte/icons/cloud-download';
 	import Settings from 'lucide-svelte/icons/settings';
@@ -11,6 +13,16 @@
 			title: 'Database',
 			url: '/database',
 			icon: Database
+		},
+		{
+			title: 'Datasets',
+			url: '/datasets',
+			icon: ClipboardList
+		},
+		{
+			title: 'Collections',
+			url: '/collections',
+			icon: Library
 		},
 		{
 			title: 'Preview',

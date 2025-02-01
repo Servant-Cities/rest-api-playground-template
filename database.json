@@ -66,7 +66,7 @@
     },
     "application-settings": {
         "description": "This is required by the app, do not delete, but feel free to update the values",
-        "hidden": "The application settings are not a valid dataset and cannot be processed by the current REST API",
+        "hidden": "Required here: The application settings are not a valid dataset and cannot be processed by the current REST API",
         "active-dataset": {
             "description": "Which dataset to use in previews and by the REST API",
             "value": "dataset-1"

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as FormPrimitive from 'formsnap';
 	import type { WithoutChild } from 'bits-ui';
-	import { cn } from '$lib/utils.js';
 	import * as Alert from '$lib/components/ui/alert/index.js';
 
 	let {

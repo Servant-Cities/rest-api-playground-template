@@ -3,14 +3,14 @@
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { databaseSchema, type DatabaseSchema } from '../../../schema';
+	import { databaseEditorSchema, type DatabaseEditorSchema } from '../../../schema';
 	import DatabaseFormatError from './database-format-error.svelte';
 
-	let { data }: { data: { form: SuperValidated<Infer<DatabaseSchema>> } } = $props();
+	let { data }: { data: { form: SuperValidated<Infer<DatabaseEditorSchema>> } } = $props();
 
 	const form = superForm(data.form, {
         dataType: 'json',
-		validators: zodClient(databaseSchema)
+		validators: zodClient(databaseEditorSchema)
 	});
 
 	const { form: formData, enhance } = form;

@@ -1,30 +1,44 @@
 import { z } from 'zod';
 
-const configurationItemSchema = (valueSchema) =>
-	z.object({ description: z.string(), value: valueSchema() });
-const applicationSettingsSchema = z
+// Database schemas
+export const configurationItemSchema = <ValueType extends z.ZodTypeAny>(
+	valueSchema: (
+		params?: z.RawCreateParams & {
+			coerce?: true;
+		}
+	) => ValueType
+): z.ZodObject<{description: z.ZodString, value: ValueType}> => z.object({ description: z.string(), value: valueSchema() });
+export const applicationSettingsSchema = z
 	.object({
 		hidden: z.optional(z.string()),
 		description: z.string(),
 		'active-dataset': configurationItemSchema(z.string)
 	})
 	.required();
-const genericCollectionSchema = z.array(z.record(z.string(), z.any()));
-const genericDatasetsSchema = z
+export type ConfigurationItemSchema = typeof configurationItemSchema;
+export type ApplicationSettingsSchema = typeof applicationSettingsSchema;
+
+export const genericCollectionSchema = z.array(z.record(z.string(), z.any()));
+export const genericDatasetsSchema = z
 	.object({ hidden: z.optional(z.string()) })
 	.catchall(genericCollectionSchema);
+export type CollectionSchema = typeof genericCollectionSchema;
+export type DatasetSchema = typeof genericDatasetsSchema;
 
-export const databaseSchema = z.object({
+export const databaseSchema = z
+	.object({
+		'application-settings': applicationSettingsSchema
+	})
+	.catchall(genericDatasetsSchema);
+export type DatabaseSchema = typeof databaseSchema;
+
+// Form schemas
+export const databaseEditorSchema = z.object({
 	rawData: z.string().transform((jsonString, ctx) => {
 		try {
 			const objectValue = JSON.parse(jsonString);
 
-			const parsed = z
-				.object({
-					'application-settings': applicationSettingsSchema
-				})
-				.catchall(genericDatasetsSchema)
-				.safeParse(objectValue);
+			const parsed = databaseSchema.safeParse(objectValue);
 			if (parsed.error) {
 				ctx.addIssue({
 					code: 'custom',
@@ -40,5 +54,4 @@ export const databaseSchema = z.object({
 		}
 	})
 });
-
-export type DatabaseSchema = typeof databaseSchema;
+export type DatabaseEditorSchema = typeof databaseEditorSchema;
