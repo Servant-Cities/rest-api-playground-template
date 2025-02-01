@@ -16,7 +16,7 @@
         ],
         "collection-2": [
             {
-                "id": "You can have multiple collection in a dataset.",
+                "id": "You can have multiple collections in a dataset.",
                 "title": "Collection 2 first"
             },
             {
@@ -53,14 +53,20 @@
         ]
     },
     "dataset-with-a-name": {
-        "collection-with-a-name": {
-            "id": "You can indeed rename anything you want in your datasets",
-            "title": "Example 1"
-        }
+        "collection-with-a-name": [
+            {
+                "id": "You can indeed rename anything you want in your datasets",
+                "title": "Example 1"
+            }
+        ]
+    },
+    "hidden-dataset": {
+        "hidden": "Optional: You can set this property to hide a dataset in the UI and use this value to explain why",
+        "draft-collection": []
     },
     "application-settings": {
         "description": "This is required by the app, do not delete, but feel free to update the values",
-        "hidden": "You can set this property to a non falsy value in any dataset to hide it from the options",
+        "hidden": "The application settings are not a valid dataset and cannot be processed by the current REST API",
         "active-dataset": {
             "description": "Which dataset to use in previews and by the REST API",
             "value": "dataset-1"

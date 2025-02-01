@@ -70,15 +70,15 @@ While this template is very agnostic, the expected adaptation of the template is
 
 ## Typing
 
-There is an exemple of how you can use zod and superforms to type your collections.
+There is an exemple of how you can use [zod](https://zod.dev/) and [superforms](https://superforms.rocks/) to type your datasets in /src/lib/schema.ts.
 
-The JSON validator for "body" can be extended to actually parse the body add validators for each collections.
+You will find there an practical example with the application settings schema and a generic dataset schema currently used to validate the data before overiding the database.
 
 You can then use the supervalidate function to type the data in you endpoints.
 
 The expected use is to call supervalidate on the request's body in POST and PUT methods, and on the data object loaded from the JSON database in the GET method.
 
-It is eventually up to you to use any typing and validation solution you like an fully remove the existing ones.
+It is eventually up to you to use any typing and validation solution you like and fully remove the existing ones.
 
 ## Features and Roadmap
 
@@ -87,7 +87,7 @@ The following features will be developped based on another project's needs but p
 - [x] Persistant dataset
 - [x] REST API
 - [x] Frontend preview
-- [ ] Multiple datasets support
+- [x] Multiple datasets support
 - [ ] Multiple frontends support
 - [ ] Connect to a production app for in context preview
 - [ ] Localized datasets
