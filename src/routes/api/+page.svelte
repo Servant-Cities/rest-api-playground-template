@@ -13,7 +13,7 @@
 	</Card.Header>
 	<Card.Content>
 		<p class="my-3"></p>
-		<Alert.Root class="my-3">
+		<Alert.Root class="my-3 bg-primary text-primary-foreground">
 			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/REST/[collection-name]`}</Alert.Title>
 			<Alert.Description>
 				<ul>
@@ -23,7 +23,7 @@
 				</ul>
 			</Alert.Description>
 		</Alert.Root>
-		<Alert.Root class="my-3">
+		<Alert.Root class="my-3 bg-primary text-primary-foreground">
 			<Alert.Title>{`${page.url.protocol}//${page.url.host}/api/REST/[collection-name]/[resource-id]`}</Alert.Title>
 			<Alert.Description>
 				<ul>
@@ -33,7 +33,7 @@
 				</ul>
 			</Alert.Description>
 		</Alert.Root>
-		<Alert.Root class="my-3">
+		<Alert.Root class="my-3 bg-primary text-primary-foreground">
 			<Alert.Title>Please be aware:</Alert.Title>
 			<Alert.Description>
 				<ul>
