@@ -4,7 +4,6 @@
 	import type { CollectionSchema } from '$lib/schema';
 
 	let { collections }: { collections: Array<[string, CollectionSchema]> } = $props();
-	console.log(collections);
 	let selectedCollection = $state(collections[0][0]);
 </script>
 

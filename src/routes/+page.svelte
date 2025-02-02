@@ -32,12 +32,12 @@
 				Frontend preview
 			</li>
 			<li class={featureClasses}>
-				<Bookmark aria-label="To be done" />
+				<BookmarkCheck aria-label="done" />
 				Multiple datasets support
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />
-				Multiple frontends support
+				Persistant preview configurations
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />

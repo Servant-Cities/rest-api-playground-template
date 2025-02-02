@@ -94,7 +94,7 @@ The following features will be developped based on another project's needs but p
 - [x] REST API
 - [x] Frontend preview
 - [x] Multiple datasets support
-- [ ] Multiple frontends support
+- [ ] Persistant preview configurations
 - [ ] Connect to a production app for in context preview
 - [ ] Localized datasets
 - [ ] Embeded S3
