@@ -12,10 +12,10 @@
 <Card.Root class="bg-primary text-primary-foreground">
 	<Card.Header>
 		<Card.Title>Features and Roadmap</Card.Title>
-		<Card.Description class="text-primary-foreground"
-			>The following features will be developped based on another project's needs but please let me
-			know if you would like some more work done on this template.</Card.Description
-		>
+		<Card.Description class="text-primary-foreground">
+			The following features will be developped based on another project's needs but please let me
+			know if you would like some more work done on this template.
+		</Card.Description>
 	</Card.Header>
 	<Card.Content>
 		<ul class="">
