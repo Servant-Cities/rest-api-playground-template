@@ -18,7 +18,7 @@ export const applicationSettingsSchema = z
 export type ConfigurationItemSchema = typeof configurationItemSchema;
 export type ApplicationSettingsSchema = typeof applicationSettingsSchema;
 
-export const genericCollectionSchema = z.array(z.record(z.string(), z.any()));
+export const genericCollectionSchema = z.array(z.record(z.string(), z.any()).refine(record => z.union([z.string(), z.number()]).safeParse(record.id)));
 export const genericDatasetsSchema = z
 	.object({ hidden: z.optional(z.string()) })
 	.catchall(genericCollectionSchema);

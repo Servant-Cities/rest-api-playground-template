@@ -30,7 +30,7 @@ There is a default database showing the expected base structure.
 
 Resources are stored in collections (JSON array) and uniquely identified by the property "id" which you should use to GET, PUT and DELETE specific resources.
 
-You can create new collections using the browser graphical interface only, creating new collections trough REST API is not possible using the template.
+Please be aware that modifying the JSON file will not update the database until you restart the development server, but it will if you do it using the app.
 
 
 ## REST API
@@ -61,6 +61,10 @@ Please be aware:
 - creating resources using PUT is not supported
 
 Feel free to update the code of your playground to add more endpoints and fit your own needs.
+
+## Direct API
+
+We have a minimal API to update the database trough http requests. Check [/api/direct](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/routes/api/direct/%5B...path%5D/%2Bserver.ts) to see what you can do and feel free to add more endpoints to fit your needs.
 
 ## GIT
 

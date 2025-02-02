@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as Alert from '$lib/components/ui/alert/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import BookmarkCheck from 'lucide-svelte/icons/bookmark-check';
@@ -64,3 +65,9 @@
 		<Button href="https://github.com/Servant-Cities/rest-api-playground-template/issues/new?template=Blank+issue" target="_blank" variant="secondary"><ArchiveRestore class="mr-2 size-4" />˝Request a feature</Button>
 	</Card.Footer>
 </Card.Root>
+<Alert.Root class="my-3">
+	<Alert.Title>Are you new here ?</Alert.Title>
+	<Alert.Description>
+		We have a guided experience in the <a href="/collections" >Collections view</a>
+	</Alert.Description>
+</Alert.Root>

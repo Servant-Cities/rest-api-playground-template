@@ -5,7 +5,7 @@
 	import * as Alert from '$lib/components/ui/alert/index.js';
 
 	const apiDocUrl = `${page.url.protocol}//${page.url.host}/api`;
-	const defaultPreviewURL = `${page.url.protocol}//${page.url.host}/database`;
+	const defaultPreviewURL = `${page.url.protocol}//${page.url.host}/collections`;
 	let urlInput = $state(defaultPreviewURL);
 	let previewURL = $state(defaultPreviewURL);
 </script>

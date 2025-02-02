@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EyeOff from 'lucide-svelte/icons/eye-off';
 	import Eye from 'lucide-svelte/icons/eye';
-	import { invalidateAll } from '$app/navigation';
 	import type { Infer } from 'sveltekit-superforms';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import { buttonVariants } from '$lib/components/ui/button/index.js';

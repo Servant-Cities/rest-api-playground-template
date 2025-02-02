@@ -1,17 +1,21 @@
 {
-    "dataset-1": {
+    "tutorial-dataset-1": {
         "collection-1": [
             {
                 "id": "You can write any id you like as long as it is unique in the collection.",
                 "title": "Collection 1 first"
             },
             {
-                "id": "Creating resources trough the REST API will use an uuid v4 by default",
+                "id": "Creating resources trough the REST API will use an uuid v4 by default.",
                 "title": "Collection 1 second"
             },
             {
-                "id": "Avoid special characters in ids",
+                "id": "Avoid special characters in ids.",
                 "title": "Collection 1 third"
+            },
+            {
+                "id": "You can move to collection-2 to learn more about this app.",
+                "title": "Collection 1 fourth"
             }
         ],
         "collection-2": [
@@ -20,56 +24,64 @@
                 "title": "Collection 2 first"
             },
             {
-                "id": "A collection correspond to a model but is not strongly typed yet",
+                "id": "A collection correspond to a model but is not strongly typed yet, check the doc to know how to do it manually.",
                 "title": "Collection 2 second"
             },
             {
-                "id": "You can type your collections by updating zod validators in the project",
+                "id": "You can type your collections by updating zod validators in the project.",
                 "title": "Collection 2 third"
+            },
+            {
+                "id": "Now you can change which dataset is active in the dataset view, use tutorial-dataset-2 and come back on the collections screen.",
+                "title": "Collection 2 fourth"
             }
         ]
     },
-    "dataset-2": {
+    "tutorial-dataset-2": {
         "collection-1": [
             {
-                "id": "You can set multiple datasets with any kind of collections you like",
+                "id": "You can set multiple datasets with any kind of collections you like, The REST API and collection page will use this one only.",
                 "title": "Collection 1 first"
             }
         ],
         "collection-2": [
             {
-                "id": "You'll be able to test each dataset separately on your apps",
+                "id": "You'll be able to test each dataset separately on your apps as well.",
                 "title": "Collection 2 first"
             },
             {
-                "id": "Two datasets with the same models correspond to different use cases of one app",
+                "id": "Two datasets with the same models correspond to different use cases of one app.",
                 "title": "Collection 2 second"
             },
             {
-                "id": "Two datasets with different models can be used if you are testing different app or a data driven one",
+                "id": "Two datasets with different models can be used if you are testing different apps or a data driven one",
                 "title": "Collection 2 third",
-                "something-different": "The database supports it as long as you don't prevent it in the zod validator"
+                "something-different": "The database supports it as long as you don't prevent it in the zod validator."
+            },
+            {
+                "id": "Everything in this app can be update in the databa, we don't always provide specific UI to manage the app so feel free to explore !",
+                "title": "Collection 2 fourth"
             }
         ]
     },
-    "dataset-with-a-name": {
-        "collection-with-a-name": [
+    "rename-me-in-database-view": {
+        "rename-me-in-database-view": [
             {
-                "id": "You can indeed rename anything you want in your datasets",
+                "id": "You can indeed rename anything you want in your datasets.",
                 "title": "Example 1"
             }
         ]
     },
     "hidden-dataset": {
-        "hidden": "Optional: You can set this property to hide a dataset in the UI and use this value to explain why",
+        "hidden": "Optional: You can set this property to hide a dataset in the UI and use this value to explain why.",
         "draft-collection": []
     },
     "application-settings": {
-        "description": "This is required by the app, do not delete, but feel free to update the values",
-        "hidden": "Required here: The application settings are not a valid dataset and cannot be processed by the current REST API",
+        "description": "This is required by the app, do not delete, but feel free to update the values.",
+        "hidden": "Required here: The application settings are not a valid dataset and cannot be processed by the current REST API.",
         "active-dataset": {
-            "description": "Which dataset to use in previews and by the REST API",
-            "value": "dataset-1"
+            "description": "Which dataset to use in previews and by the REST API.",
+            "value": "tutorial-dataset-1"
         }
     }
 }
