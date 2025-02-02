@@ -68,6 +68,6 @@
 <Alert.Root class="my-3">
 	<Alert.Title>Are you new here ?</Alert.Title>
 	<Alert.Description>
-		We have a guided experience in the <a href="/collections" >Collections view</a>
+		We have a guided experience in the <a href="/collections" class="font-medium text-secondary-foreground underline" >Collections view</a>
 	</Alert.Description>
 </Alert.Root>
