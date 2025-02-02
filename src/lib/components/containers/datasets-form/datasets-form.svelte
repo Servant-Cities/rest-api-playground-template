@@ -12,11 +12,11 @@
 		datasets,
 		activeDataset
 	}: { datasets?: Array<[string, Infer<DatasetSchema>]>; activeDataset?: string } = $props();
-	const activeDatasetItem = datasets?.find(([name]) => name === activeDataset);
-	const inactiveDatasetsItems = datasets?.filter(
+	const activeDatasetItem = $derived(datasets?.find(([name]) => name === activeDataset));
+	const inactiveDatasetsItems = $derived(datasets?.filter(
 		([name, { hidden }]) => name !== activeDataset && !hidden
-	);
-	const hiddenDatasets = datasets?.filter(([name, { hidden }]) => name !== activeDataset && hidden);
+	));
+	const hiddenDatasets = $derived(datasets?.filter(([name, { hidden }]) => name !== activeDataset && hidden));
 	let collapsibleOpen = $state(false);
 </script>
 
