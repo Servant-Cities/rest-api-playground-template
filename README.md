@@ -95,7 +95,7 @@ The following features will be developped based on another project's needs but p
 - [x] Frontend preview
 - [x] Multiple datasets support
 - [x] Persistant preview configurations
-- [ ] Connect to a production app for in context preview
+- [x] (SDK) Connect to a production app for in context preview
 - [ ] Apply different fetch overrides on a per preview basis
 - [ ] Localized datasets
 - [ ] Embeded S3

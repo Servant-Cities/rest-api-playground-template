@@ -1,6 +1,8 @@
 import type { SavedPreviewSchema } from '$lib/schema';
 
-const getRerouteURL = (url: string, pathsMap: Record<string, string>): string => {
+let messageHandler: (event: MessageEvent) => void;
+
+export const getRerouteURL = (url: string, pathsMap: Record<string, string>): string => {
 	let rerouteURL = url;
 	let urlPath: string;
 	try {
@@ -36,9 +38,9 @@ export interface Params {
 	preview: SavedPreviewSchema;
 }
 
-type FetchOverrideCreator = ({ iFrameFetch, preview }: Params) => typeof fetch;
+export type FetchOverrideCreator = ({ iFrameFetch, preview }: Params) => typeof fetch;
 
-const createFetchOverride: FetchOverrideCreator =
+export const createFetchOverride: FetchOverrideCreator =
 	({ iFrameFetch, preview }) =>
 	async (...args) => {
 		let [firstArg, ...otherArgs] = [...args];
@@ -57,4 +59,20 @@ const createFetchOverride: FetchOverrideCreator =
 		return iFrameFetch(...args);
 	};
 
-export default createFetchOverride;
+export const createMessageHandler = (origin: string) =>
+	(messageHandler = (event: MessageEvent) => {
+		if (event.origin !== origin) return;
+		if (event.data.type === 'REQUEST_PREVIEW_SDK') {
+			const { preview } = event.data;
+			const iFrameFetch = window.fetch;
+			window.fetch = createFetchOverride({ iFrameFetch, preview });
+		}
+	});
+
+export const accept = (origin: string) => {
+	window.addEventListener('message', createMessageHandler(origin));
+};
+
+export const revoke = () => {
+	window.addEventListener('message', messageHandler);
+};

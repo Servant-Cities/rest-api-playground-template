@@ -1,9 +1,16 @@
 <script lang="ts">
 	import '../app.css';
+	import { onMount } from 'svelte';
+	import {accept} from '$lib/previewSDK'
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import AppSidebar from '$lib/components/containers/app-sidebar.svelte';
+	
 
 	let { children } = $props();
+
+	onMount(()=> {
+		accept(window.origin)
+	})
 </script>
 
 <Sidebar.Provider>

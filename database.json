@@ -86,32 +86,40 @@
     },
     "saved-previews": [
         {
-            "name": "This app on port 5173",
+            "name": "Preview localhost:5173",
             "description": "Preview the app currently running (or else on port 5173).",
-            "url": "http://localhost:5173/datasets",
+            "url": "http://localhost:5173",
+            "pathsMap": {}
+        },
+        {
+            "name": "Reroute localhost:5173/api to this app's REST API",
+            "description": "Try fetching from another app running on port 5174 and reroute requests to /api",
+            "url": "http://localhost:5174",
             "pathsMap": {
-                "/api/*": "/api/"
+                "/api/*": "/api/REST/",
+                "/api": "/api"
             }
         },
         {
-            "name": "Reroute API of a local app on port 5174 to this app's REST API",
-            "description": "Try to run two instances of this app and see how the wrong request to /api is rerouted to /api/REST on your current app.",
-            "url": "http://localhost:5174/api/collection-1",
+            "name": "Reroute localhost:3000/api to this app's REST API",
+            "description": "Added for Nextjs users (and else)",
+            "url": "http://localhost:3000",
             "pathsMap": {
-                "/api": "/api",
-                "/api/*": "/api/REST/"
+                "/api/*": "/api/REST/",
+                "/api": "/api"
             }
         },
         {
-            "name": "Edit this list in database editor",
-            "description": "It can be handy if you are often testing the same app",
-            "url": "http://localhost:5173/database",
+            "name": "Reroute localhost:80/api to this app's REST API",
+            "description": "Added for default HTTP",
+            "url": "http://localhost:3000",
             "pathsMap": {
-                "/api/*": "/api/"
+                "/api/*": "/api/REST/",
+                "/api": "/api"
             }
         },
         {
-            "name": "You can even configure the rerouting logic in the editor",
+            "name": "Go to the editor to learn how to configure your own rerouting logic",
             "description": "It can be handy if an app you are testing has endpoints requiring specific rules.",
             "url": "http://localhost:3000",
             "pathsMap": {

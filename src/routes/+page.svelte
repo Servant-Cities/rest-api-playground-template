@@ -40,8 +40,8 @@
 				Persistant preview configurations
 			</li>
 			<li class={featureClasses}>
-				<Bookmark aria-label="To be done" />
-				Connect to a production app for in context preview
+				<BookmarkCheck aria-label="done" />
+				(SDK) Connect to a production app for in context preview
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />

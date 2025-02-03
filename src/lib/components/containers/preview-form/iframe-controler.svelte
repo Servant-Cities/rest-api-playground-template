@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import type { SavedPreviewSchema } from '$lib/schema';
-	import createFetchOverride from './fetchOverride';
 
-	let { preview }: { preview: Partial<SavedPreviewSchema> & Pick<SavedPreviewSchema, 'url'> } = $props();
+	let { preview }: { preview: Partial<SavedPreviewSchema> & Pick<SavedPreviewSchema, 'url'> } =
+		$props();
 
 	let iFrame = $state<HTMLIFrameElement | null>(null);
 	let loaded = $state(false);
@@ -13,8 +13,13 @@
 		console.log('iframe loaded');
 
 		if (iFrame?.contentWindow) {
-			const iFrameFetch = iFrame.contentWindow.fetch;
-			iFrame.contentWindow.fetch = createFetchOverride({ iFrameFetch, preview });
+			iFrame.contentWindow.postMessage(
+				JSON.stringify({
+					type: 'REQUEST_PREVIEW_SDK',
+					params: preview
+				}),
+				new URL(preview.url).origin
+			);
 		}
 	};
 
@@ -28,4 +33,9 @@
 	});
 </script>
 
-<iframe bind:this={iFrame} title="preview" class="h-[65vh] w-full overflow-y-auto{loaded ? "bg-white" : ''}" src={preview.url}></iframe>
+<iframe
+	bind:this={iFrame}
+	title="preview"
+	class="h-[65vh] w-full overflow-y-auto{loaded ? 'bg-white' : ''}"
+	src={preview.url}
+></iframe>
