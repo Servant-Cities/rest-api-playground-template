@@ -1,25 +1,27 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import * as Alert from '$lib/components/ui/alert/index.js';
+	import type { SavedPreviewSchema } from '$lib/schema';
 	import IframeControler from './iframe-controler.svelte';
 	import Searchable from './searchable.svelte';
 
 	const apiDocUrl = `${page.url.protocol}//${page.url.host}/api`;
 	const defaultPreviewURL = `${page.url.protocol}//${page.url.host}/collections`;
-	let previewURL = $state(defaultPreviewURL);
+	let preview: SavedPreviewSchema | Pick<SavedPreviewSchema, 'url'> = $state({
+		url: defaultPreviewURL
+	});
 
-	const onSubmit = (url) => {
-		previewURL = url;
-		console.log(previewURL);
+	const onSubmit = (value: typeof preview) => {
+		preview = value;
 	};
 </script>
 
 <div
-	class="flex-column h-[70vh] overflow-hidden rounded-md border border-solid border-primary bg-primary text-primary-foreground"
+	class="flex-column overflow-hidden rounded-md border border-solid border-primary bg-primary text-primary-foreground"
 >
-	<Searchable search={defaultPreviewURL} {onSubmit} />
-	{#if previewURL}
-		<IframeControler {previewURL} />
+	<Searchable search={preview.url} {onSubmit} />
+	{#if preview.url}
+		<IframeControler {preview} />
 	{/if}
 </div>
 <Alert.Root class="mt-2">

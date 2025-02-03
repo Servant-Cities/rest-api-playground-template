@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import type { SavedPreviewsSchema } from '$lib/schema';
+	import type { SavedPreviewSchema } from '$lib/schema';
 	import { getDatabaseProperty } from '$lib/databaseUtils';
 
 	let {
@@ -10,11 +10,11 @@
 		onSubmit
 	}: {
 		search: string;
-		onSubmit: (url: string) => void;
+		onSubmit: (preview: SavedPreviewSchema | Pick<SavedPreviewSchema, 'url'>) => void;
 	} = $props();
 
-	let savedPreviews: SavedPreviewsSchema = $state([]);
-	let filteredPreviews: SavedPreviewsSchema = $state([]);
+	let savedPreviews: Array<SavedPreviewSchema> = $state([]);
+	let filteredPreviews: Array<SavedPreviewSchema> = $state([]);
 	let searchQuery = $state(search);
 
 	function filterPreviews() {
@@ -28,13 +28,13 @@
 	function handleSubmit(event: Event) {
 		event.preventDefault();
 		filteredPreviews = [];
-		onSubmit(searchQuery);
+		onSubmit({url: searchQuery});
 	}
 
-	function selectPreview(url: string) {
-		searchQuery = url;
+	function selectPreview(preview: SavedPreviewSchema) {
+		searchQuery = preview.url;
 		filteredPreviews = [];
-		onSubmit(url);
+		onSubmit(preview);
 	}
 
 	onMount(async () => {
@@ -56,9 +56,9 @@
 	</div>
 	{#if filteredPreviews.length > 0}
 		<ul class="rounded border border-primary bg-white text-black">
-			{#each filteredPreviews as { name, url }}
-				<li class="cursor-pointer p-2 hover:bg-gray-200" onclick={() => selectPreview(url)}>
-					{name}
+			{#each filteredPreviews as preview}
+				<li class="cursor-pointer p-2 hover:bg-gray-200" onclick={() => selectPreview(preview)}>
+					{preview.name}
 				</li>
 			{/each}
 		</ul>

@@ -16,30 +16,30 @@ export const applicationSettingsSchema = z
 	})
 	.required();
 export type ConfigurationItemSchema = typeof configurationItemSchema;
-export type ApplicationSettingsSchema = typeof applicationSettingsSchema;
+export type ApplicationSettingsSchema = z.infer<typeof applicationSettingsSchema>;
 
-const savedPreviewsSchema = z.array(z.object({
+const savedPreviewSchema = z.object({
 	name: z.string(),
 	description: z.string(),
 	url: z.string(),
 	pathsMap: z.record(z.string(), z.string())
-}))
-export type SavedPreviewsSchema = typeof savedPreviewsSchema;
+})
+export type SavedPreviewSchema = z.infer<typeof savedPreviewSchema>;
 
 export const genericCollectionSchema = z.array(z.record(z.string(), z.any()).refine(record => z.union([z.string(), z.number()]).safeParse(record.id)));
 export const genericDatasetsSchema = z
 	.object({ hidden: z.optional(z.string()) })
 	.catchall(genericCollectionSchema);
-export type CollectionSchema = typeof genericCollectionSchema;
-export type DatasetSchema = typeof genericDatasetsSchema;
+export type CollectionSchema = z.infer<typeof genericCollectionSchema>;
+export type DatasetSchema = z.infer<typeof genericDatasetsSchema>;
 
 export const databaseSchema = z
 	.object({
 		'application-settings': applicationSettingsSchema,
-		'saved-previews': savedPreviewsSchema
+		'saved-previews': z.array(savedPreviewSchema)
 	})
 	.catchall(genericDatasetsSchema);
-export type DatabaseSchema = typeof databaseSchema;
+export type DatabaseSchema = z.infer<typeof databaseSchema>;
 
 // Form schemas
 export const databaseEditorSchema = z.object({

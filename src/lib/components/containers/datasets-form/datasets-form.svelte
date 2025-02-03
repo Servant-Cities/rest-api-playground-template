@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EyeOff from 'lucide-svelte/icons/eye-off';
 	import Eye from 'lucide-svelte/icons/eye';
-	import type { Infer } from 'sveltekit-superforms';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
@@ -11,7 +10,7 @@
 	let {
 		datasets,
 		activeDataset
-	}: { datasets?: Array<[string, Infer<DatasetSchema>]>; activeDataset?: string } = $props();
+	}: { datasets?: Array<[string, DatasetSchema]>; activeDataset?: string } = $props();
 	const activeDatasetItem = $derived(datasets?.find(([name]) => name === activeDataset));
 	const inactiveDatasetsItems = $derived(datasets?.filter(
 		([name, { hidden }]) => name !== activeDataset && !hidden
@@ -38,10 +37,12 @@
 					<span class="sr-only">Toggle hidden datasets</span>
 				</Collapsible.Trigger>
 			</div>
-			<Card.Description class="text-primary-foreground">
-				REST API is currently exposing {Object.keys(activeDatasetItem[1]).length -
-					(activeDatasetItem[1].hidden ? 1 : 0)} collections from {activeDatasetItem[0]}
-			</Card.Description>
+			{#if activeDatasetItem}
+				<Card.Description class="text-primary-foreground">
+					REST API is currently exposing {Object.keys(activeDatasetItem[1]).length -
+						(activeDatasetItem[1].hidden ? 1 : 0)} collections from {activeDatasetItem[0]}
+				</Card.Description>
+			{/if}
 		</Card.Header>
 		<Card.Content>
 			<ul class="list-none">
