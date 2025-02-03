@@ -9,7 +9,7 @@ export const load: PageServerLoad = async () => {
 	const { data: database } = databaseSchema.safeParse(rawData);
 
 	if (database) {
-		const datasets = Object.entries(database).filter(([name]) => name !== 'application-settings');
+		const datasets = Object.entries(database).filter(([name]) => name !== 'application-settings' && name !== 'saved-previews');
 		const activeDataset = database['application-settings']['active-dataset'].value;
 		return {
 			datasets,

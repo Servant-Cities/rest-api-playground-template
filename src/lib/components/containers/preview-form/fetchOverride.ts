@@ -1,44 +1,60 @@
-const matchesRoute = (url: string, paths: Array<string>): boolean => {
-    console.log(url);
+import type { SavedPreviewSchema } from '$lib/schema';
 
-    let urlPath: string;
-    try {
-        urlPath = new URL(url).pathname;
-    } catch {
-        urlPath = url.startsWith('/') ? url : '/' + url;
-    }
+const getRerouteURL = (url: string, pathsMap: Record<string, string>): string => {
+	let rerouteURL = url;
+	let urlPath: string;
+	try {
+		urlPath = new URL(url).pathname;
+	} catch {
+		urlPath = url.startsWith('/') ? url : '/' + url;
+	}
 
-    return paths.some(route => {
-        const routePattern = new RegExp(
-            '^' + route.replace(/\*/g, '.*') + '$'
-        );
-        return routePattern.test(urlPath);
-    });
+	const matcher = Object.keys(pathsMap).find((pathToMatch) => {
+		const routePattern = new RegExp('^' + pathToMatch.replace(/\*/g, '.*') + '$');
+		return routePattern.test(urlPath);
+	});
+
+	if (matcher) {
+		const newPath = pathsMap[matcher];
+		if (newPath !== 'SKIP') {
+			try {
+				const parsedUrl = new URL(url);
+				parsedUrl.pathname = newPath.replace(/\*/g, urlPath);
+				rerouteURL = parsedUrl.toString();
+			} catch {
+				rerouteURL = url.replace(urlPath, newPath.replace(/\*/g, urlPath));
+			}
+		}
+	}
+
+	console.log(`Using override fetch to reroute ${url} to ${rerouteURL}`);
+	return rerouteURL;
 };
 
 export interface Params {
-    iFrameFetch: typeof fetch;
-    paths: Array<string>;
+	iFrameFetch: typeof fetch;
+	preview: SavedPreviewSchema;
 }
 
-type FetchOverrideCreator = ({ iFrameFetch, paths }: Params) => typeof fetch;
+type FetchOverrideCreator = ({ iFrameFetch, preview }: Params) => typeof fetch;
 
 const createFetchOverride: FetchOverrideCreator =
-    ({ iFrameFetch, paths }) =>
-    async (...args) => {
-        const url = typeof args[0] === 'string' ? args[0] : args[0].url;
+	({ iFrameFetch, preview }) =>
+	async (...args) => {
+		let [firstArg, ...otherArgs] = [...args];
+		const url = typeof firstArg === 'string' ? firstArg : firstArg.url;
 
-        if (url && matchesRoute(url, paths)) {
-            console.log(`Using override fetch for: ${url}`);
-            try {
-                return fetch(...args);
-            } catch (err) {
-                console.error(err);
-            }
-        }
+		if (url) {
+			const reroute = getRerouteURL(url, preview.pathsMap);
+			try {
+				return fetch(reroute, ...otherArgs);
+			} catch (err) {
+				console.error(err);
+			}
+		}
 
-        console.log(`Using iFrameFetch for: ${url}`);
-        return iFrameFetch(...args);
-    };
+		console.log(`Using iframe fetch for: ${url}`);
+		return iFrameFetch(...args);
+	};
 
 export default createFetchOverride;

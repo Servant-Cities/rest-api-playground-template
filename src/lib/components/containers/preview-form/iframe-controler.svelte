@@ -14,7 +14,7 @@
 
 		if (iFrame?.contentWindow) {
 			const iFrameFetch = iFrame.contentWindow.fetch;
-			iFrame.contentWindow.fetch = createFetchOverride({ iFrameFetch, paths: preview.paths });
+			iFrame.contentWindow.fetch = createFetchOverride({ iFrameFetch, preview });
 		}
 	};
 

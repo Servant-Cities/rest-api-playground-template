@@ -112,9 +112,10 @@
         },
         {
             "name": "You can even configure the rerouting logic in the editor",
-            "description": "It can be handy if an app you are testing uses a specific endpoint for its REST API",
-            "url": "http://localhost:5173/database",
+            "description": "It can be handy if an app you are testing has endpoints requiring specific rules.",
+            "url": "http://localhost:3000",
             "pathsMap": {
+                "/api/graphql": "SKIP",
                 "/api/*": "/api/REST/"
             }
         }

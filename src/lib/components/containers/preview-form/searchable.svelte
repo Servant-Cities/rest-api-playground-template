@@ -17,37 +17,41 @@
 	let filteredPreviews: Array<SavedPreviewSchema> = $state([]);
 	let searchQuery = $state(search);
 
-	function filterPreviews() {
+	const filterPreviews = () => {
 		filteredPreviews = savedPreviews.filter(
-			({ name, url }) =>
-				name.includes(searchQuery) ||
-				url.includes(searchQuery)
+			({ name, url }) => name.includes(searchQuery) || url.includes(searchQuery)
 		);
-	}
+	};
 
-	function handleSubmit(event: Event) {
+	const handleSubmit = (event: Event) => {
 		event.preventDefault();
 		filteredPreviews = [];
-		onSubmit({url: searchQuery});
-	}
+		onSubmit({ url: searchQuery });
+	};
 
-	function selectPreview(preview: SavedPreviewSchema) {
+	const selectPreview = (preview: SavedPreviewSchema) => {
 		searchQuery = preview.url;
 		filteredPreviews = [];
 		onSubmit(preview);
-	}
+	};
+
+	const createKeydownHandler = (preview: SavedPreviewSchema) => (event: KeyboardEvent) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			selectPreview(preview);
+		}
+	};
 
 	onMount(async () => {
 		const savedPreviewsResponse = await getDatabaseProperty('saved-previews');
-        savedPreviews = await savedPreviewsResponse.json();
+		savedPreviews = await savedPreviewsResponse.json();
 	});
 </script>
 
-<form onsubmit={handleSubmit} class="flex flex-col p-1 gap-1">
+<form onsubmit={handleSubmit} class="flex flex-col gap-1 p-1">
 	<div class="flex gap-2">
 		<Input
 			bind:value={searchQuery}
-			onchange={filterPreviews}
+			oninput={filterPreviews}
 			placeholder="Search or enter URL"
 			class="rounded-md bg-primary text-primary-foreground"
 		/>
@@ -57,7 +61,11 @@
 	{#if filteredPreviews.length > 0}
 		<ul class="rounded border border-primary bg-white text-black">
 			{#each filteredPreviews as preview}
-				<li class="cursor-pointer p-2 hover:bg-gray-200" onclick={() => selectPreview(preview)}>
+				<li
+					class="cursor-pointer p-2 hover:bg-gray-200 focus:bg-gray-300"
+					onclick={() => selectPreview(preview)}
+					onkeydown={createKeydownHandler(preview)}
+				>
 					{preview.name}
 				</li>
 			{/each}
