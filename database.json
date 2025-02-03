@@ -73,15 +73,50 @@
         ]
     },
     "hidden-dataset": {
-        "hidden": "Optional: You can set this property to hide a dataset in the UI and use this value to explain why.",
+        "hidden": "Optional: You can set this property to hide a dataset in the UI and use this value to explain why. (only in database editor)",
         "draft-collection": []
     },
     "application-settings": {
-        "description": "This is required by the app, do not delete, but feel free to update the values.",
+        "description": "Application settings are required by the app, do not delete or rename, but feel free to update the values.",
         "hidden": "Required here: The application settings are not a valid dataset and cannot be processed by the current REST API.",
         "active-dataset": {
             "description": "Which dataset to use in previews and by the REST API.",
             "value": "tutorial-dataset-1"
         }
-    }
+    },
+    "saved-previews": [
+        {
+            "name": "This app on port 5173",
+            "description": "Preview the app currently running (or else on port 5173).",
+            "url": "http://localhost:5173/datasets",
+            "pathsMap": {
+                "/api/*": "/api/"
+            }
+        },
+        {
+            "name": "Reroute API of a local app on port 5174 to this app's REST API",
+            "description": "Try to run two instances of this app and see how the wrong request to /api is rerouted to /api/REST on your current app.",
+            "url": "http://localhost:5174/api/collection-1",
+            "pathsMap": {
+                "/api": "/api",
+                "/api/*": "/api/REST/"
+            }
+        },
+        {
+            "name": "Edit this list in database editor",
+            "description": "It can be handy if you are often testing the same app",
+            "url": "http://localhost:5173/database",
+            "pathsMap": {
+                "/api/*": "/api/"
+            }
+        },
+        {
+            "name": "You can even configure the rerouting logic in the editor",
+            "description": "It can be handy if an app you are testing uses a specific endpoint for its REST API",
+            "url": "http://localhost:5173/database",
+            "pathsMap": {
+                "/api/*": "/api/REST/"
+            }
+        }
+    ]
 }

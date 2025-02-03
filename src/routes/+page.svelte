@@ -36,12 +36,16 @@
 				Multiple datasets support
 			</li>
 			<li class={featureClasses}>
-				<Bookmark aria-label="To be done" />
+				<BookmarkCheck aria-label="done" />
 				Persistant preview configurations
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />
 				Connect to a production app for in context preview
+			</li>
+			<li class={featureClasses}>
+				<Bookmark aria-label="To be done" />
+				Apply different fetch overrides on a per preview basis
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />

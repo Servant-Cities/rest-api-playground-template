@@ -3,7 +3,7 @@
 		addDatabaseProperty,
 		updateDatabaseProperty,
 		deleteDatabaseProperty
-	} from '$lib/databaseUtils.ts';
+	} from '$lib/databaseUtils.js';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';

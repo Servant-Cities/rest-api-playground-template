@@ -18,6 +18,14 @@ export const applicationSettingsSchema = z
 export type ConfigurationItemSchema = typeof configurationItemSchema;
 export type ApplicationSettingsSchema = typeof applicationSettingsSchema;
 
+const savedPreviewsSchema = z.array(z.object({
+	name: z.string(),
+	description: z.string(),
+	url: z.string(),
+	pathsMap: z.record(z.string(), z.string())
+}))
+export type SavedPreviewsSchema = typeof savedPreviewsSchema;
+
 export const genericCollectionSchema = z.array(z.record(z.string(), z.any()).refine(record => z.union([z.string(), z.number()]).safeParse(record.id)));
 export const genericDatasetsSchema = z
 	.object({ hidden: z.optional(z.string()) })
@@ -27,7 +35,8 @@ export type DatasetSchema = typeof genericDatasetsSchema;
 
 export const databaseSchema = z
 	.object({
-		'application-settings': applicationSettingsSchema
+		'application-settings': applicationSettingsSchema,
+		'saved-previews': savedPreviewsSchema
 	})
 	.catchall(genericDatasetsSchema);
 export type DatabaseSchema = typeof databaseSchema;
