@@ -2,11 +2,11 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import AppSidebar from '$lib/components/containers/app-sidebar.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
 <Sidebar.Provider>
-	<AppSidebar />
+	<AppSidebar tenant={data.tenant}/>
 	<Sidebar.Trigger />
 	<main class="p-10 w-full">
 		{@render children?.()}

@@ -21,8 +21,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 			if (!db) {
 				return new Response('Database not found', { status: 404 });
 			}
-
+			
 			event.locals.db = db;
+			event.locals.tenant = access.data.name;
 			console.log(`${access.data.name} requested ${new URL(event.request.url).pathname}`);
 
 			return await resolve(event);

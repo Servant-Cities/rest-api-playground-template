@@ -8,6 +8,8 @@
 	import { page } from '$app/state';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
+	let { tenant }: { tenant: string } = $props();
+
 	const mainItems = [
 		{
 			title: 'Database',
@@ -50,7 +52,7 @@
 <Sidebar.Root>
 	<Sidebar.Content>
 		<Sidebar.Group>
-			<Sidebar.GroupLabel>Playground</Sidebar.GroupLabel>
+			<Sidebar.GroupLabel>{tenant || 'Playground'}</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each mainItems as item (item.title)}
@@ -72,17 +74,17 @@
 	<Sidebar.Footer>
 		<Sidebar.Menu>
 			{#each footerItems as item (item.title)}
-						<Sidebar.MenuItem>
-							<Sidebar.MenuButton>
-								{#snippet child({ props })}
-									<a href={item.url} {...props} data-active={isActive(item.url)}>
-										<item.icon />
-										<span>{item.title}</span>
-									</a>
-								{/snippet}
-							</Sidebar.MenuButton>
-						</Sidebar.MenuItem>
-					{/each}
+				<Sidebar.MenuItem>
+					<Sidebar.MenuButton>
+						{#snippet child({ props })}
+							<a href={item.url} {...props} data-active={isActive(item.url)}>
+								<item.icon />
+								<span>{item.title}</span>
+							</a>
+						{/snippet}
+					</Sidebar.MenuButton>
+				</Sidebar.MenuItem>
+			{/each}
 		</Sidebar.Menu>
 	</Sidebar.Footer>
 </Sidebar.Root>
