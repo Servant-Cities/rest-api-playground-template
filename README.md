@@ -32,6 +32,8 @@ Resources are stored in collections (JSON array) and uniquely identified by the 
 
 Please be aware that modifying the JSON file will not update the database until you restart the development server, but it will if you do it using the app.
 
+The current content of the database is tutorial data you can read to understand the different features of this app, you can start reading it from the Collections view or directly in the database editor.
+
 
 ## REST API
 
@@ -65,6 +67,17 @@ Feel free to update the code of your playground to add more endpoints and fit yo
 ## Direct API
 
 We have a minimal API to update the database trough http requests. Check [/api/direct](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/routes/api/direct/%5B...path%5D/%2Bserver.ts) to see what you can do and feel free to add more endpoints to fit your needs.
+
+## Preview SDK
+
+(Unsafe for production apps) You can copy the content of [this file](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/lib/previewSDK.ts) in any app you want to preview in order to enable your playground to override requests and let you test your data directly in an iFrame.
+
+(Safe) Don't forget to update the authorized origin in the sdk and add any verification logic you deem necessary. Authorizing localhost origin or forwarding services such as ngrok would indeed result in a cross site scripting vulnerability.
+
+The other way to connect the app is trough the playground's rest API.
+
+We are working on a feature that let you define preset fetch overrides on a per preview basis.
+
 
 ## GIT
 
