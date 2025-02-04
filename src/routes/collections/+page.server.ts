@@ -15,7 +15,7 @@ export const load: PageServerLoad = async () => {
 		return fail(500);
 	}
 	const activeDatasetName = database['application-settings']['active-dataset'].value;
-	const activeDataset = database[activeDatasetName];
+	const activeDataset = database['datasets'][activeDatasetName];
 	if (!activeDataset) {
 		console.error(
 			`Cannot find active dataset with the name ${activeDatasetName}`

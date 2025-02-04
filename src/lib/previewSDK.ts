@@ -36,20 +36,31 @@ export const getRerouteURL = (url: string, pathsMap: Record<string, string>): st
 export interface Params {
 	iFrameFetch: typeof fetch;
 	preview: SavedPreviewSchema;
+	secret: string;
 }
 
-export type FetchOverrideCreator = ({ iFrameFetch, preview }: Params) => typeof fetch;
+export type FetchOverrideCreator = ({ iFrameFetch, preview, secret }: Params) => typeof fetch;
 
 export const createFetchOverride: FetchOverrideCreator =
-	({ iFrameFetch, preview }) =>
+	({ iFrameFetch, preview, secret }) =>
 	async (...args) => {
 		let [firstArg, ...otherArgs] = [...args];
 		const url = typeof firstArg === 'string' ? firstArg : firstArg.url;
 
 		if (url) {
 			const reroute = getRerouteURL(url, preview.pathsMap);
+			const init = (typeof firstArg === 'string' ? otherArgs[0] : firstArg) || {};
+
+			const modifiedInit = {
+				...init,
+				headers: {
+					...init.headers,
+					Authorization: `Bearer ${secret}`
+				}
+			};
+
 			try {
-				return fetch(reroute, ...otherArgs);
+				return fetch(reroute, typeof firstArg === 'string' ? modifiedInit : [firstArg, ...otherArgs]);
 			} catch (err) {
 				console.error(err);
 			}

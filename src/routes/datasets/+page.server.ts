@@ -1,7 +1,7 @@
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import { databaseSchema } from '../../lib/schema.js';
-import { db } from '$lib/server/database/index.js';
+import { masterDB } from '$lib/server/database/index.js';
 
 export const load: PageServerLoad = async () => {
 	const rawData = await db.getData('/');
@@ -9,7 +9,7 @@ export const load: PageServerLoad = async () => {
 	const { data: database } = databaseSchema.safeParse(rawData);
 
 	if (database) {
-		const datasets = Object.entries(database).filter(([name]) => name !== 'application-settings' && name !== 'saved-previews');
+		const datasets = Object.entries(database['datasets']);
 		const activeDataset = database['application-settings']['active-dataset'].value;
 		return {
 			datasets,
