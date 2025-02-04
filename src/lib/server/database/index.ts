@@ -1,18 +1,22 @@
 import fs from 'node:fs';
 import { JsonDB, Config } from 'node-json-db';
 
-const getMasterDB = () => {
+export let databasesList: Record<string, JsonDB> = {};
+export const getDB = (db: string) => {
+	if (databasesList[db]) return databasesList[db];
 	try {
-		if (!fs.existsSync('./databases/master-db.json')) {
+		if (!fs.existsSync(`./databases/${db}`)) {
 			const defaultData = fs.readFileSync('./databases/tutorial-db.json', 'utf8');
 			console.log(defaultData)
-			fs.writeFileSync('./databases/master-db.json', defaultData)
+			fs.writeFileSync(`./databases/${db}`, defaultData)
 		}
 	} catch (err) {
-		throw(`Couldn't create master database: ${err}`);
+		throw(`Couldn't create database ${db}: ${err}`);
 	}
 
-	return new JsonDB(new Config('./databases/master-db.json', true, true, '/'));
+	databasesList[db] = new JsonDB(new Config(`./databases/${db}`, true, true, '/'));
+	return databasesList[db]
 };
 
-export const masterDB = getMasterDB();
+export const masterDB = getDB('master-db.json');
+

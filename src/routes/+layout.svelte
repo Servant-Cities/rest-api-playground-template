@@ -1,22 +1,13 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import {accept} from '$lib/previewSDK'
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import AppSidebar from '$lib/components/containers/app-sidebar.svelte';
-	
+	import { accept } from '$lib/previewSDK';
 
 	let { children } = $props();
 
-	onMount(()=> {
-		accept(window.origin)
-	})
+	onMount(() => {
+		accept(window.origin);
+	});
 </script>
 
-<Sidebar.Provider>
-	<AppSidebar />
-	<Sidebar.Trigger />
-	<main class="p-10 w-full">
-		{@render children?.()}
-	</main>
-</Sidebar.Provider>
+{@render children?.()}

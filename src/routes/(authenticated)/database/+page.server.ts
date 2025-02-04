@@ -3,7 +3,7 @@ import { fail } from '@sveltejs/kit';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions, PageServerLoad } from './$types.js';
-import { databaseEditorSchema } from '../../lib/schema.js';
+import { databaseEditorSchema } from '../../../lib/schema.js';
 import { masterDB } from '$lib/server/database/index.js';
 
 export const load: PageServerLoad = async () => {

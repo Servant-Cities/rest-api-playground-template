@@ -22,7 +22,7 @@ NB: If you have another app running on this port, it will jump to the next port 
 
 ## Interface
 
-Open your browser on http://localhost:5173 (or other port) in order to be able to edit the content of the whole database in JSON format.
+Open your browser on http://localhost:5173 (or other port used by the previous command) in order to be able to edit the content of the whole database in JSON format.
 
 There is a default database showing the expected base structure.
 
@@ -32,7 +32,7 @@ Resources are stored in collections (JSON array) and uniquely identified by the 
 
 Please be aware that modifying the JSON file will not update the database until you restart the development server, but it will if you do it using the app.
 
-The current content of the database is tutorial data you can read to understand the different features of this app, you can start reading it from the Collections view or directly in the database editor.
+The current content of the database is tutorial data you can read to understand the different features of this app, you can start reading it from the Collections view or directly in the database editor and skip this dog if want to quickly get your hands on the playground.
 
 
 ## REST API

@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
-import { databaseSchema } from '../../lib/schema.js';
+import { databaseSchema } from '../../../lib/schema.js';
 import { masterDB } from '$lib/server/database/index.js';
 
 export const load: PageServerLoad = async () => {
