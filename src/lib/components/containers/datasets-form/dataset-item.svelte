@@ -14,8 +14,8 @@
 	const use = async () => updateDatabaseProperty('application-settings/active-dataset/value', name);
 	const toggleHidden = async () =>
 		dataset.hidden
-			? deleteDatabaseProperty(`${name}/hidden`)
-			: addDatabaseProperty(`${name}/hidden`, 'User asked to hide trough UI');
+			? deleteDatabaseProperty(`datasets/${name}/hidden`)
+			: addDatabaseProperty(`datasets/${name}/hidden`, 'User asked to hide trough UI');
 
 	const terminalStyle = 'bg-primary text-primary-foreground';
 </script>
