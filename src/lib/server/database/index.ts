@@ -5,12 +5,8 @@ const getMasterDB = () => {
 	try {
 		if (!fs.existsSync('./databases/master-db.json')) {
 			const defaultData = fs.readFileSync('./databases/tutorial-db.json', 'utf8');
-
-			fs.writeFileSync('./databases/master-db', defaultData, (err) => {
-				if (err) {
-					throw err;
-				}
-			});
+			console.log(defaultData)
+			fs.writeFileSync('./databases/master-db.json', defaultData)
 		}
 	} catch (err) {
 		throw(`Couldn't create master database: ${err}`);

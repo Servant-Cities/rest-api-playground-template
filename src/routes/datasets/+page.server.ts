@@ -4,7 +4,7 @@ import { databaseSchema } from '../../lib/schema.js';
 import { masterDB } from '$lib/server/database/index.js';
 
 export const load: PageServerLoad = async () => {
-	const rawData = await db.getData('/');
+	const rawData = await masterDB.getData('/');
 	if (!rawData) return fail(404);
 	const { data: database } = databaseSchema.safeParse(rawData);
 
