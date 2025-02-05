@@ -32,9 +32,8 @@
 						<h2 class="font-semibold text-xl">Select a dataset to use</h2>
 					{/if}
 				</Card.Title>
-				<Collapsible.Trigger class={buttonVariants({ variant: 'ghost', size: 'sm', class: 'w-9 p-0' })}>
-					{#if collapsibleOpen}<Eye />{:else}<EyeOff />{/if}
-					<span class="sr-only">Toggle hidden datasets</span>
+				<Collapsible.Trigger class={buttonVariants({ variant: 'ghost', size: 'sm', class: 'py-1 px-2' })}>
+					{#if collapsibleOpen}<span>Hide hidden datasets</span><Eye />{:else}<span>Show hidden datasets</span><EyeOff />{/if}
 				</Collapsible.Trigger>
 			</div>
 			{#if activeDatasetItem}

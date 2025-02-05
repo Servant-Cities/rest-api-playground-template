@@ -60,7 +60,8 @@ Please be aware:
 - Search params are not supported.
 - PUT and POST methods expect JSON format
 - It is technicaly possible to overide a resource's id, which you should normaly avoid
-- creating resources using PUT is not supported
+- Creating resources using PUT is not supported
+- If you activated authentication, you need to send an Authorization header: 'Bearer your-secret'
 
 Feel free to update the code of your playground to add more endpoints and fit your own needs.
 

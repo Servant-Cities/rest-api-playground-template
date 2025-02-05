@@ -2,6 +2,9 @@
 	import { page } from '$app/state';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as Alert from '$lib/components/ui/alert/index.js';
+	import type { LayoutData } from '../$types';
+
+	let { data }: { data: LayoutData } = $props();
 </script>
 
 <Card.Root class="bg-primary text-primary-foreground">
@@ -42,7 +45,8 @@
 					<li>
 						- It is technicaly possible to overide a resource's id, which you should normaly avoid
 					</li>
-					<li>- creating resources using PUT is not supported</li>
+					<li>- Creating resources using PUT is not supported</li>
+					<li>- If you activated authentication, you need to send an Authorization header: 'Bearer your-secret'</li>
 				</ul>
 			</Alert.Description>
 		</Alert.Root>

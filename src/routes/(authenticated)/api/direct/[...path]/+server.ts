@@ -4,45 +4,45 @@ import { masterDB } from '$lib/server/database';
 
 const getPath = (url) => url.href.split('/direct')[1]
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url, locals }) => {
 	try {
 		const path = getPath(url);
-		const data = await masterDB.getData(path);
+		const data = await locals.db.getData(path);
 		return json(data);
 	} catch (error) {
 		return json({ error: 'Failed to fetch data' }, { status: 500 });
 	}
 };
 
-export const POST: RequestHandler = async ({ request, url }) => {
+export const POST: RequestHandler = async ({ request, url, locals }) => {
 	try {
 		const path = getPath(url);
 		const {payload} = await request.json();
-		await masterDB.push(path, payload);
+		await locals.db.push(path, payload);
 		return json({ message: 'Property created' }, { status: 201 });
 	} catch (error) {
 		return json({ error: 'Failed to create property' }, { status: 500 });
 	}
 };
 
-export const PUT: RequestHandler = async ({ request, url }) => {
+export const PUT: RequestHandler = async ({ request, url, locals }) => {
 	try {
 		const path = getPath(url);
 		const {payload} = await request.json();
-		await masterDB.push(path, payload, true);
+		await locals.db.push(path, payload, true);
 		return json({ message: 'Property updated' }, { status: 201 });
 	} catch (error) {
 		return json({ error: 'Failed to update property' }, { status: 500 });
 	}
 };
 
-export const DELETE: RequestHandler = async ({ url }) => {
+export const DELETE: RequestHandler = async ({ url, locals }) => {
 	try {
 		const path = getPath(url);
         if (path.startsWith('/application-settings')) {
             return json({ error: 'Cannot delete inside application-settings' }, { status: 403 });
         }
-		await masterDB.delete(path);
+		await locals.db.delete(path);
 		return json({ message: 'Property deleted' });
 	} catch (error) {
 		return json({ error: 'Failed to delete property' }, { status: 500 });

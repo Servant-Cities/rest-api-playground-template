@@ -1,10 +1,9 @@
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import { databaseSchema } from '../../../lib/schema.js';
-import { masterDB } from '$lib/server/database/index.js';
 
-export const load: PageServerLoad = async () => {
-	const rawData = await masterDB.getData('/');
+export const load: PageServerLoad = async ({locals}) => {
+	const rawData = await locals.db.getData('/');
 	if (!rawData) return fail(404);
 	const { data: database } = databaseSchema.safeParse(rawData);
 

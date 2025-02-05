@@ -8,9 +8,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const requireAuth = await masterDB.getData('/application-settings/require-authentication/value');
 	if (!requireAuth) return await resolve(event);
 
-	const requestSecret = event.cookies.get('secret');
-
+	let requestSecret = event.cookies.get('secret') || event.request.headers.get('Authorization');
 	if (requestSecret) {
+		if (requestSecret.startsWith('Bearer ')) {
+			requestSecret = requestSecret.slice(7);
+		}
+
 		const authorizedKeys = await masterDB.getData('/application-settings/authorized-keys');
 		const access = authorizedKeySchema.safeParse(
 			authorizedKeys?.value.find(({ secret }) => secret === requestSecret)
@@ -19,16 +22,22 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (access.success) {
 			const db = getDB(access.data.db);
 			if (!db) {
-				return new Response('Database not found', { status: 404 });
+				return new Response('Database not created', { status: 404 });
 			}
 
+			const { secret, ...tenant } = access.data;
+
 			event.locals.db = db;
-			event.locals.tenant = access.data.name;
+			event.locals.tenant = tenant;
 			console.log(`${access.data.name} requested ${new URL(event.request.url).pathname}`);
 
 			return await resolve(event);
 		}
 		return new Response('Forbidden', { status: 403 });
+	}
+
+	if (event.url.pathname.startsWith('/api/')) {
+		return new Response('Unauthorized', { status: 401 });
 	}
 
 	throw redirect(307, '/login');
