@@ -69,22 +69,51 @@ Feel free to update the code of your playground to add more endpoints and fit yo
 
 We have a minimal API to update the database trough http requests. Check [/api/direct](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/routes/api/direct/%5B...path%5D/%2Bserver.ts) to see what you can do and feel free to add more endpoints to fit your needs.
 
+If you activated authentication, you will also need to send the Authorization header to use it.
+
 ## Preview SDK
 
-(Unsafe for production apps) You can copy the content of [this file](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/lib/previewSDK.ts) in any app you want to preview in order to enable your playground to override requests and let you test your data directly in an iFrame.
+(Unsafe for production apps) You can copy the content of [this file (typescript)](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/lib/previewSDK.ts) in any frontend app you want to preview in order to enable your playground to override requests and let you test your data directly in an iFrame.
 
 (Safe) Don't forget to update the authorized origin in the sdk and add any verification logic you deem necessary. Authorizing localhost origin or forwarding services such as ngrok would indeed result in a cross site scripting vulnerability.
 
 The other way to connect the app is trough the playground's rest API.
 
-We are working on a feature that let you define preset fetch overrides on a per preview basis.
+You can manualy update your sdk to reformat requests data to match the playground API if you need to, feel free to use the preview parameters to react to playground-specific configuration.
 
+## Authentication
+
+You can activate authentication by setting the require-authentication configuration to true, either directly in the database editor or in your source file (don't forget to restart the app if you do so).
+
+Then update the secret for Master DB in the authorized-keys to set your own secret.
+
+The frontend will now redirect you to a login screen if you are not authenticated while the REST API will respond with an authentication error
+
+## Multitenancy
+
+Multitenancy is activated by default with authentication, you can set it up by adding new authorized keys and changing the database name.
+
+The database will be created the first time the corresponding secret is used.
+
+One database can be access with different secrets but each secret only grants access to one databse.
+
+The name of these authorized keys is logged in the console when they access the app.
+
+We don't have a docker configuration yet, but feel free to propose one and set different volumes for each of your databases.
+
+## Deploying
+
+You can host the app by running the development server or by following [Sveltekit's node-adapter doc](https://svelte.dev/docs/kit/adapter-node#Deploying)
+
+The app needs write access to the /databases/ folder overwise it won't be able to initate the Master DB or any other.
+
+Do not delete the tutorial database, nor write secrets in it, new tenants will get a clone of this database in its state at the moment of the first connection so you should consider this data accessible to anyone you grant access to.
+
+The tutorial database is tracked by git and might prevent pulling repository updates if you modify it without a proper rebase configuration.
 
 ## GIT
 
-Be aware the database is not ignored in the git repository, this is intended since the playgound repo is designed to evolve with different supported collections.
-
-While this template is very agnostic, the expected adaptation of the template is to create a version tracking of different datasets for different use cases, as well as the APIs and typing the come with them.
+Be aware the tutorial database is not ignored in the git repository, this is intended to provide versionning of the database format and help you migrate data in the eventuality of a breaking change, but also to be cloned to create new tenants in multi tenancy mode.
 
 ## Typing
 
@@ -110,7 +139,7 @@ The following features will be developped based on another project's needs but p
 - [x] Multiple datasets support
 - [x] Persistant preview configurations
 - [x] (SDK) Connect to a production app for in context preview
-- [ ] Multi-tenant and authenticated access
+- [x] Multi-tenant and authenticated access
 - [ ] Localized datasets
 - [ ] Embeded S3
 - [ ] Docker instalation

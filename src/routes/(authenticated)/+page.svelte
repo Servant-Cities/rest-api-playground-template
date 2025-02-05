@@ -44,7 +44,7 @@
 				(SDK) Connect to a production app for in context preview
 			</li>
 			<li class={featureClasses}>
-				<Bookmark aria-label="To be done" />
+				<BookmarkCheck aria-label="done" />
 				Multi-tenant and authenticated access
 			</li>
 			<li class={featureClasses}>
