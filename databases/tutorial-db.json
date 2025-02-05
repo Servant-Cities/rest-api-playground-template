@@ -92,7 +92,7 @@
             "description": "A secret is used to grant access, the name is logged and displayed in the UI, you can set the same database for different keys or use different ones for multi-tenant but authorized keys will always be read from admin-db.json.",
             "value": [
                 {
-                    "name": "Master",
+                    "name": "Master DB",
                     "secret": "default-key",
                     "db": "master-db.json"
                 }

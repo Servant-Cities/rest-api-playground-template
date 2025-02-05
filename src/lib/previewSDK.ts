@@ -34,21 +34,21 @@ export const getRerouteURL = (url: string, pathsMap: Record<string, string>): st
 };
 
 export interface Params {
-	iFrameFetch: typeof fetch;
-	preview: SavedPreviewSchema;
+	initialFetch: typeof fetch;
+	pathsMap: SavedPreviewSchema['pathsMap'];
 	secret: string;
 }
 
-export type FetchOverrideCreator = ({ iFrameFetch, preview, secret }: Params) => typeof fetch;
+export type FetchOverrideCreator = ({ initialFetch, pathsMap, secret }: Params) => typeof fetch;
 
 export const createFetchOverride: FetchOverrideCreator =
-	({ iFrameFetch, preview, secret }) =>
+	({ initialFetch, pathsMap, secret }) =>
 	async (...args) => {
 		let [firstArg, ...otherArgs] = [...args];
 		const url = typeof firstArg === 'string' ? firstArg : firstArg.url;
 
 		if (url) {
-			const reroute = getRerouteURL(url, preview.pathsMap);
+			const reroute = getRerouteURL(url, pathsMap);
 			const init = (typeof firstArg === 'string' ? otherArgs[0] : firstArg) || {};
 
 			const modifiedInit = {
@@ -67,16 +67,16 @@ export const createFetchOverride: FetchOverrideCreator =
 		}
 
 		console.log(`Using iframe fetch for: ${url}`);
-		return iFrameFetch(...args);
+		return initialFetch(...args);
 	};
 
 export const createMessageHandler = (origin: string) =>
 	(messageHandler = (event: MessageEvent) => {
 		if (event.origin !== origin) return;
 		if (event.data.type === 'REQUEST_PREVIEW_SDK') {
-			const { preview } = event.data;
+			const { preview: {pathsMap} } = event.data;
 			const iFrameFetch = window.fetch;
-			window.fetch = createFetchOverride({ iFrameFetch, preview });
+			window.fetch = createFetchOverride({ initialFetch: iFrameFetch, pathsMap, secret: '' });
 		}
 	});
 

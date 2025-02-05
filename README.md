@@ -109,7 +109,7 @@ The following features will be developped based on another project's needs but p
 - [x] Multiple datasets support
 - [x] Persistant preview configurations
 - [x] (SDK) Connect to a production app for in context preview
-- [ ] Apply different fetch overrides on a per preview basis
+- [ ] Multi-tenant and authenticated access
 - [ ] Localized datasets
 - [ ] Embeded S3
 - [ ] Docker instalation

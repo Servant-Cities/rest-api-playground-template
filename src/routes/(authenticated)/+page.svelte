@@ -45,7 +45,7 @@
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />
-				Apply different fetch overrides on a per preview basis
+				Multi-tenant and authenticated access
 			</li>
 			<li class={featureClasses}>
 				<Bookmark aria-label="To be done" />
