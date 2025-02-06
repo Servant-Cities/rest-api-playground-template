@@ -10,7 +10,7 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
-	let { tenant }: { tenant: string } = $props();
+	let { tenant }: { tenant: {name: string} } = $props();
 
 	const mainItems = [
 		{
@@ -55,7 +55,7 @@
 	<Sidebar.Content>
 		<Sidebar.Group>
 			<Sidebar.GroupLabel class="mb-1">
-				<span class="text-lg">{tenant || 'Playground'}</span>
+				<span class="text-lg">{tenant?.name || 'Playground'}</span>
 			</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
