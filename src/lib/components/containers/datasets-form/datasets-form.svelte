@@ -20,7 +20,7 @@
 </script>
 
 <Collapsible.Root bind:open={collapsibleOpen}>
-	<Card.Root class="bg-primary text-primary-foreground h-[70vh] overflow-y-auto">
+	<Card.Root class="bg-black text-white h-[70vh] overflow-y-auto">
 		<Card.Header>
 			<div class="flex items-center justify-between space-x-4">
 				<Card.Title>
@@ -37,7 +37,7 @@
 				</Collapsible.Trigger>
 			</div>
 			{#if activeDatasetItem}
-				<Card.Description class="text-primary-foreground">
+				<Card.Description class="text-white">
 					REST API is currently exposing {Object.keys(activeDatasetItem[1]).length -
 						(activeDatasetItem[1].hidden ? 1 : 0)} collections from {activeDatasetItem[0]}
 				</Card.Description>

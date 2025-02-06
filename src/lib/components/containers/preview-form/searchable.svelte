@@ -53,16 +53,16 @@
 			bind:value={searchQuery}
 			oninput={filterPreviews}
 			placeholder="Search or enter URL"
-			class="rounded-md bg-primary text-primary-foreground"
+			class="rounded-md bg-black text-white"
 		/>
 
-		<Button type="submit" variant="outline" class="bg-primary text-white">Load</Button>
+		<Button type="submit" variant="outline" class="bg-black text-white">Load</Button>
 	</div>
 	{#if filteredPreviews.length > 0}
-		<ul class="rounded border border-primary bg-white text-black">
+		<ul class="rounded border mt-1">
 			{#each filteredPreviews as preview}
 				<li
-					class="cursor-pointer p-2 hover:bg-gray-200 focus:bg-gray-300"
+					class="cursor-pointer p-2 hover:bg-gray-200 focus:bg-gray-300 hover:text-black"
 					onclick={() => selectPreview(preview)}
 					onkeydown={createKeydownHandler(preview)}
 				>

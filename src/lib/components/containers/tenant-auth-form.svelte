@@ -23,10 +23,10 @@
 		</div>
 	</form>
 	{#if form?.success}
-		<p class="text-green-500">Successfully signed in!</p>
+		<p class="text-green-500 text-center">Successfully signed in!</p>
 	{/if}
 	{#if form?.error}
-		<p class="text-red-500">{form?.error.message || 'Failed to sign in. Please try again.'}</p>
+		<p class="text-red-500 text-center">{form?.error.message || 'Failed to sign in. Please try again.'}</p>
 	{/if}
 	<div class="relative">
 		<div class="absolute inset-0 flex items-center">

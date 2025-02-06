@@ -11,7 +11,7 @@
 			Carefully built by Servant Cities
         </h2>
 	</div>
-	<div class="h-full w-full flex flex-col justify-center">
+	<div class="h-full w-full flex flex-col justify-center border-l border-l-4">
 		<div class="mx-auto flex w-full flex-col  space-y-6 sm:w-[350px]">
 			<div class="flex flex-col space-y-2 text-center">
 				<h1 class="text-2xl font-semibold tracking-tight">Connect to your Playground</h1>

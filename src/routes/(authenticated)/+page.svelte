@@ -9,10 +9,10 @@
 	const featureClasses = 'flex';
 </script>
 
-<Card.Root class="bg-primary text-primary-foreground">
+<Card.Root class="dark">
 	<Card.Header>
 		<Card.Title>Features and Roadmap</Card.Title>
-		<Card.Description class="text-primary-foreground">
+		<Card.Description class="text-white">
 			The following features will be developped based on another project's needs but please let me
 			know if you would like some more work done on this template.
 		</Card.Description>

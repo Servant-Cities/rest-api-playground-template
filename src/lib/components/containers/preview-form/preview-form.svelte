@@ -17,7 +17,7 @@
 </script>
 
 <div
-	class="flex-column overflow-hidden rounded-md border border-solid border-primary bg-primary text-primary-foreground"
+	class="flex-column overflow-hidden rounded-md border border-solid border-black bg-black text-white"
 >
 	<Searchable search={preview.url} {onSubmit} />
 	{#if preview.url}

@@ -9,15 +9,15 @@
 
 <Tabs.Root
 	bind:value={selectedCollection}
-	class="h-[70vh] overflow-auto rounded-md border border-primary bg-primary text-primary-foreground"
+	class="h-[70vh] overflow-auto rounded-md border border-white bg-black text-white"
 >
-	<Tabs.List class="flex w-full gap-1 bg-primary text-primary-foreground">
+	<Tabs.List class="flex w-full gap-1 rounded-s-none dark">
 		{#each collections as [option]}
 			<Tabs.Trigger class="w-full" value={option}>{option}</Tabs.Trigger>
 		{/each}
 	</Tabs.List>
 	{#each collections as [collectionName, resources]}
-		<Tabs.Content value={collectionName}>
+		<Tabs.Content value={collectionName} class="mt-0">
 			<Table.Root>
 				<Table.Caption>
 					We are waiting for Tanstack tables to be svelte5 compatible so we can replace the raw

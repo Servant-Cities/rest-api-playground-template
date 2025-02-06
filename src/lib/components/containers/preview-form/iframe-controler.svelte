@@ -36,6 +36,6 @@
 <iframe
 	bind:this={iFrame}
 	title="preview"
-	class="h-[65vh] w-full overflow-y-auto{loaded ? 'bg-white' : ''}"
+	class="h-[65vh] w-full overflow-y-auto mt-1 p-1 rounded-md {loaded ? 'bg-grey' : 'bg-black'}"
 	src={preview.url}
 ></iframe>

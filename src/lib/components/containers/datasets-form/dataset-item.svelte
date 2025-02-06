@@ -17,7 +17,7 @@
 			? deleteDatabaseProperty(`datasets/${name}/hidden`)
 			: addDatabaseProperty(`datasets/${name}/hidden`, 'User asked to hide trough UI');
 
-	const terminalStyle = 'bg-primary text-primary-foreground';
+	const terminalStyle = 'dark';
 </script>
 
 <li class="my-4 flex w-full font-mono">
@@ -38,9 +38,9 @@
 				<Badge class="mr-4 text-sm">Hidden</Badge>
 			{/if}
 			<Avatar.Root>
-				<Avatar.Fallback class="bg-secondary text-primary"
-					>{Object.keys(dataset).length - (dataset.hidden ? 1 : 0)}</Avatar.Fallback
-				>
+				<Avatar.Fallback class="dark">
+					{Object.keys(dataset).length - (dataset.hidden ? 1 : 0)}
+				</Avatar.Fallback>
 			</Avatar.Root>
 		</span>
 	</span>

@@ -20,7 +20,7 @@
 	<Form.Field {form} name="rawData" class="mb-4">
 		<Form.Control>
 			{#snippet children({ props })}
-				<Textarea {...props} bind:value={$formData.rawData} class="h-[70vh] bg-primary text-primary-foreground"/>
+				<Textarea {...props} bind:value={$formData.rawData} class="h-[70vh] bg-black text-white"/>
 			{/snippet}
 		</Form.Control>
 		<Form.Description>Edit database data</Form.Description>

@@ -17,8 +17,8 @@
 <FormPrimitive.FieldErrors bind:ref {...restProps}>
 	{#snippet children({ errors, errorProps })}
 		{#if errors.length > 0}
-			<Alert.Root class="border-destructive">
-				<Alert.Title class="text-destructive">The database format is not respected</Alert.Title>
+			<Alert.Root class="border-destructive dark:bg-destructive dark:bg-opacity-40">
+				<Alert.Title class="text-destructive font-semibold dark:text-foreground">The database format is not respected</Alert.Title>
 				<Alert.Description>
 					{#each errors as error}
 						<div {...errorProps}><pre>{error}</pre></div>

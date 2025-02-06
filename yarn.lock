@@ -1667,6 +1667,11 @@ minimatch@^9.0.4:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-7.1.2.tgz#93a9626ce5e5e66bd4db86849e7515e92340a707"
   integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
 
+mode-watcher@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/mode-watcher/-/mode-watcher-0.5.1.tgz#310e6ac144b3f0b3cfb486e1015d9e746e503377"
+  integrity sha512-adEC6T7TMX/kzQlaO/MtiQOSFekZfQu4MC+lXyoceQG+U5sKpJWZ4yKXqw846ExIuWJgedkOIPqAYYRk/xHm+w==
+
 mri@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.2.0.tgz#6721480fec2a11a4889861115a48b6cbe7cc8f0b"
