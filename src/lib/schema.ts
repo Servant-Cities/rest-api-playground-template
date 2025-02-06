@@ -2,9 +2,16 @@ import { z } from 'zod';
 
 // Database schemas
 export const authorizedKeySchema = z.object({
-	'name': z.string(),
-	'secret': z.string(),
-	'db': z.string()
+	name: z.string(),
+	secret: z.string(),
+	db: z.string()
+});
+
+export const selfServiceKeysSchema = z.object({
+	active: z.boolean(),
+	'delete-after': z.number(),
+	processor: z.string(),
+	host: z.string()
 });
 
 export const configurationItemSchema = <ValueType extends z.ZodTypeAny>(
@@ -17,19 +24,20 @@ export const configurationItemSchema = <ValueType extends z.ZodTypeAny>(
 	z.object({ description: z.string(), value: valueSchema() });
 export const applicationSettingsSchema = z
 	.object({
-		'description': z.string(),
+		description: z.string(),
 		'active-dataset': configurationItemSchema(z.string),
-		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional()
+		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional(),
+		'self-service-keys': configurationItemSchema(() => selfServiceKeysSchema).optional()
 	})
 	.required();
 export type ConfigurationItemSchema = typeof configurationItemSchema;
 export type ApplicationSettingsSchema = z.infer<typeof applicationSettingsSchema>;
 
 const savedPreviewSchema = z.object({
-	'name': z.string(),
-	'description': z.string(),
-	'url': z.string(),
-	'pathsMap': z.record(z.string(), z.string())
+	name: z.string(),
+	description: z.string(),
+	url: z.string(),
+	pathsMap: z.record(z.string(), z.string())
 });
 export type SavedPreviewSchema = z.infer<typeof savedPreviewSchema>;
 
@@ -45,7 +53,7 @@ export type CollectionSchema = z.infer<typeof genericCollectionSchema>;
 export type DatasetSchema = z.infer<typeof genericDatasetsSchema>;
 
 export const databaseSchema = z.object({
-	'datasets': z.record(z.string(), genericDatasetsSchema),
+	datasets: z.record(z.string(), genericDatasetsSchema),
 	'application-settings': applicationSettingsSchema,
 	'saved-previews': z.array(savedPreviewSchema)
 });
@@ -62,6 +70,15 @@ export const databaseEditorSchema = z.object({
 				ctx.addIssue({
 					code: 'custom',
 					message: parsed.error.message
+				});
+				return z.NEVER;
+			}
+			const activeDataset = parsed.data['application-settings']['active-dataset'].value;
+
+			if (!Object.keys(parsed.data.datasets).some((key) => key === activeDataset)) {
+				ctx.addIssue({
+					code: 'custom',
+					message: 'You are trying to delete your active dataset, this would break the app.'
 				});
 				return z.NEVER;
 			}

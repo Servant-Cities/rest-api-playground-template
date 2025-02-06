@@ -2206,6 +2206,11 @@ svelte-eslint-parser@^0.43.0:
     postcss "^8.4.39"
     postcss-scss "^4.0.9"
 
+svelte-sonner@^0.3.28:
+  version "0.3.28"
+  resolved "https://registry.yarnpkg.com/svelte-sonner/-/svelte-sonner-0.3.28.tgz#b24b3e7af924d5c50ca2e33cede1382283074abf"
+  integrity sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==
+
 svelte-toolbelt@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/svelte-toolbelt/-/svelte-toolbelt-0.5.0.tgz#c5eeec1c29e89a7b8faf35d60868988cd0e7caf0"

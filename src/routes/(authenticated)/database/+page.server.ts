@@ -5,7 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions, PageServerLoad } from './$types.js';
 import { databaseEditorSchema } from '../../../lib/schema.js';
 
-export const load: PageServerLoad = async ({locals}) => {
+export const load: PageServerLoad = async ({ locals }) => {
 	try {
 		const rawData = fs.readFileSync(`./databases/${locals.tenant.db}`, 'utf8');
 		return {
@@ -24,6 +24,7 @@ export const actions = {
 		if (!form.valid) {
 			return fail(400, { form });
 		}
+		
 		fs.writeFile(`./databases/${locals.tenant.db}`, form.data.rawData, (err) => {
 			if (err) {
 				return fail(500, { form });
