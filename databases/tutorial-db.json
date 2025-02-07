@@ -84,9 +84,52 @@
             "description": "Which dataset to use in previews and by the REST API.",
             "value": "tutorial-dataset-1"
         },
-        "require-authentication": {
-            "description": "Wether the app should require authentication or not, this let you protect your datasets online.",
-            "value": false
+        "saved-previews": {
+            "description": "Use theses settings to save your previews and customize redirections using the pathsMap.",
+            "value": [
+                {
+                    "name": "Preview localhost:5173",
+                    "description": "Preview the app currently running (or else on port 5173).",
+                    "url": "http://localhost:5173",
+                    "pathsMap": {}
+                },
+                {
+                    "name": "Reroute localhost:5173/api to this app's REST API",
+                    "description": "Try fetching from another app running on port 5174 and reroute requests to /api",
+                    "url": "http://localhost:5174",
+                    "pathsMap": {
+                        "/api/*": "/api/REST/",
+                        "/api": "/api"
+                    }
+                },
+                {
+                    "name": "Reroute localhost:3000/api to this app's REST API",
+                    "description": "Added for Nextjs users (and else)",
+                    "url": "http://localhost:3000",
+                    "pathsMap": {
+                        "/api/*": "/api/REST/",
+                        "/api": "/api"
+                    }
+                },
+                {
+                    "name": "Reroute localhost:80/api to this app's REST API",
+                    "description": "Added for default HTTP",
+                    "url": "http://localhost:3000",
+                    "pathsMap": {
+                        "/api/*": "/api/REST/",
+                        "/api": "/api"
+                    }
+                },
+                {
+                    "name": "Go to the editor to learn how to configure your own rerouting logic",
+                    "description": "It can be handy if an app you are testing has endpoints requiring specific rules.",
+                    "url": "http://localhost:3000",
+                    "pathsMap": {
+                        "/api/graphql": "SKIP",
+                        "/api/*": "/api/REST/"
+                    }
+                }
+            ]
         },
         "information-notice": {
             "description": "(Not implemented yet) Usefull if you invite people outside of your organization to use the service.",
@@ -113,50 +156,10 @@
                     "db": "master-db.json"
                 }
             ]
+        },
+        "require-authentication": {
+            "description": "Wether the app should require authentication or not, this let you protect your datasets online. Make sure you have access to the master DB's secret or file in order not to lock you out.",
+            "value": false
         }
-    },
-    "saved-previews": [
-        {
-            "name": "Preview localhost:5173",
-            "description": "Preview the app currently running (or else on port 5173).",
-            "url": "http://localhost:5173",
-            "pathsMap": {}
-        },
-        {
-            "name": "Reroute localhost:5173/api to this app's REST API",
-            "description": "Try fetching from another app running on port 5174 and reroute requests to /api",
-            "url": "http://localhost:5174",
-            "pathsMap": {
-                "/api/*": "/api/REST/",
-                "/api": "/api"
-            }
-        },
-        {
-            "name": "Reroute localhost:3000/api to this app's REST API",
-            "description": "Added for Nextjs users (and else)",
-            "url": "http://localhost:3000",
-            "pathsMap": {
-                "/api/*": "/api/REST/",
-                "/api": "/api"
-            }
-        },
-        {
-            "name": "Reroute localhost:80/api to this app's REST API",
-            "description": "Added for default HTTP",
-            "url": "http://localhost:3000",
-            "pathsMap": {
-                "/api/*": "/api/REST/",
-                "/api": "/api"
-            }
-        },
-        {
-            "name": "Go to the editor to learn how to configure your own rerouting logic",
-            "description": "It can be handy if an app you are testing has endpoints requiring specific rules.",
-            "url": "http://localhost:3000",
-            "pathsMap": {
-                "/api/graphql": "SKIP",
-                "/api/*": "/api/REST/"
-            }
-        }
-    ]
+    }
 }

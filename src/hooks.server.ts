@@ -6,7 +6,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname === '/login') return resolve(event);
 
 	const requireAuth = await masterDB.getData('/application-settings/require-authentication/value');
-	if (!requireAuth) return await resolve(event);
+	const authorizedKeys = await masterDB.getData('/application-settings/authorized-keys');
+	if (!requireAuth) {
+		event.locals.db = masterDB;
+		const { secret, ...tenant } = authorizedKeys.value[0];
+		event.locals.tenant = tenant;
+		return await resolve(event);
+	}
 
 	let requestSecret = event.cookies.get('secret') || event.request.headers.get('Authorization');
 	if (requestSecret) {
@@ -14,7 +20,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 			requestSecret = requestSecret.slice(7);
 		}
 
-		const authorizedKeys = await masterDB.getData('/application-settings/authorized-keys');
 		const access = authorizedKeySchema.safeParse(
 			authorizedKeys?.value.find(({ secret }) => secret === requestSecret)
 		);
@@ -33,7 +38,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			return await resolve(event);
 		}
-		return new Response('Forbidden', { status: 403 });
+		throw redirect(307, '/login?/disconnect');
 	}
 
 	if (event.url.pathname.startsWith('/api/')) {

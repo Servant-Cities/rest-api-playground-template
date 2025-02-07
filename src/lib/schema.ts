@@ -19,6 +19,14 @@ export const informationNoticeSchema = z.object({
 	'host-url': z.string()
 });
 
+const savedPreviewSchema = z.object({
+	name: z.string(),
+	description: z.string(),
+	url: z.string(),
+	pathsMap: z.record(z.string(), z.string())
+});
+export type SavedPreviewSchema = z.infer<typeof savedPreviewSchema>;
+
 export const configurationItemSchema = <ValueType extends z.ZodTypeAny>(
 	valueSchema: (
 		params?: z.RawCreateParams & {
@@ -31,22 +39,15 @@ export const applicationSettingsSchema = z
 	.object({
 		description: z.string(),
 		'active-dataset': configurationItemSchema(z.string),
-		'require-authentication': configurationItemSchema(z.boolean).optional().or(z.undefined()),
+		'saved-previews': configurationItemSchema(() => z.array(savedPreviewSchema)),
 		'information-notice': configurationItemSchema(() => informationNoticeSchema).optional().or(z.undefined()),
 		'self-service-keys': configurationItemSchema(() => selfServiceKeysSchema).optional().or(z.undefined()),
-		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional().or(z.undefined())
+		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional().or(z.undefined()),
+		'require-authentication': configurationItemSchema(z.boolean).optional().or(z.undefined())
 	})
 	.required();
 export type ConfigurationItemSchema = typeof configurationItemSchema;
 export type ApplicationSettingsSchema = z.infer<typeof applicationSettingsSchema>;
-
-const savedPreviewSchema = z.object({
-	name: z.string(),
-	description: z.string(),
-	url: z.string(),
-	pathsMap: z.record(z.string(), z.string())
-});
-export type SavedPreviewSchema = z.infer<typeof savedPreviewSchema>;
 
 export const genericCollectionSchema = z.array(
 	z
@@ -61,8 +62,7 @@ export type DatasetSchema = z.infer<typeof genericDatasetsSchema>;
 
 export const databaseSchema = z.object({
 	datasets: z.record(z.string(), genericDatasetsSchema),
-	'application-settings': applicationSettingsSchema,
-	'saved-previews': z.array(savedPreviewSchema)
+	'application-settings': applicationSettingsSchema
 });
 export type DatabaseSchema = z.infer<typeof databaseSchema>;
 

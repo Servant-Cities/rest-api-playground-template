@@ -2,7 +2,6 @@
 	import type { PageData } from './$types.js';
 	import type { LayoutData } from '../$types.js';
 	import Configuration from '$lib/components/containers/configuration.svelte';
-	import type { ConfigurationItemSchema } from '$lib/schema.js';
 	let { data }: { data: PageData & LayoutData } = $props();
 </script>
 

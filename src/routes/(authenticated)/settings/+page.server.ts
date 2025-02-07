@@ -11,11 +11,12 @@ const masterOnlySettings: Array<keyof ApplicationSettingsSchema> = [
 
 export const load: PageServerLoad = async ({locals}) => {
 	const rawSettings = await locals.db.getData('/application-settings');
+	const isMasterDB = await locals.tenant.db === "master-db.json";
 	if (!rawSettings) return fail(404);
 	const { data: {description, ...parsedSettings} } = applicationSettingsSchema.safeParse(rawSettings);
 
 	if (parsedSettings) {
-		const settings = Object.entries(parsedSettings);
+		const settings = Object.entries(parsedSettings).filter(([name]) => isMasterDB || !masterOnlySettings.includes(name));
 		return {
 			description,
 			settings

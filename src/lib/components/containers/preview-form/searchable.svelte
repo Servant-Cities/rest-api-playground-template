@@ -42,7 +42,7 @@
 	};
 
 	onMount(async () => {
-		const savedPreviewsResponse = await getDatabaseProperty('saved-previews');
+		const savedPreviewsResponse = await getDatabaseProperty('/application-settings/saved-previews/value');
 		savedPreviews = await savedPreviewsResponse.json();
 	});
 </script>
