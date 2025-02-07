@@ -9,9 +9,14 @@ export const authorizedKeySchema = z.object({
 
 export const selfServiceKeysSchema = z.object({
 	active: z.boolean(),
-	'delete-after': z.number(),
+	'delete-after': z.number()
+});
+
+export const informationNoticeSchema = z.object({
 	processor: z.string(),
-	host: z.string()
+	'processor-url': z.string(),
+	host: z.string(),
+	'host-url': z.string()
 });
 
 export const configurationItemSchema = <ValueType extends z.ZodTypeAny>(
@@ -26,8 +31,10 @@ export const applicationSettingsSchema = z
 	.object({
 		description: z.string(),
 		'active-dataset': configurationItemSchema(z.string),
-		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional(),
-		'self-service-keys': configurationItemSchema(() => selfServiceKeysSchema).optional()
+		'require-authentication': configurationItemSchema(z.boolean).optional().or(z.undefined()),
+		'information-notice': configurationItemSchema(() => informationNoticeSchema).optional().or(z.undefined()),
+		'self-service-keys': configurationItemSchema(() => selfServiceKeysSchema).optional().or(z.undefined()),
+		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional().or(z.undefined())
 	})
 	.required();
 export type ConfigurationItemSchema = typeof configurationItemSchema;
