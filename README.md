@@ -61,7 +61,7 @@ Please be aware:
 - PUT and POST methods expect JSON format
 - It is technicaly possible to overide a resource's id, which you should normaly avoid
 - Creating resources using PUT is not supported
-- If you activated authentication, you need to send an Authorization header: 'Bearer your-secret'
+- If authentication is activated, you need to send an Authorization header: 'Bearer your-secret'
 
 Feel free to update the code of your playground to add more endpoints and fit your own needs.
 
@@ -69,7 +69,7 @@ Feel free to update the code of your playground to add more endpoints and fit yo
 
 We have a minimal API to update the database trough http requests. Check [/api/direct](https://github.com/Servant-Cities/rest-api-playground-template/blob/main/src/routes/api/direct/%5B...path%5D/%2Bserver.ts) to see what you can do and feel free to add more endpoints to fit your needs.
 
-If you activated authentication, you will also need to send the Authorization header to use it.
+If authentication is activated, you will also need to send the Authorization header to use it.
 
 ## Preview SDK
 

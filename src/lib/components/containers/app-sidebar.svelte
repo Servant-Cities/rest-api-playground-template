@@ -3,6 +3,7 @@
 	import ClipboardList from 'lucide-svelte/icons/clipboard-list';
 	import Library from 'lucide-svelte/icons/library';
 	import LogOut from 'lucide-svelte/icons/log-out';
+	import Settings from 'lucide-svelte/icons/settings';
 	import MonitorCheck from 'lucide-svelte/icons/monitor-check';
 	import CloudDownload from 'lucide-svelte/icons/cloud-download';
 	import Gift from 'lucide-svelte/icons/gift';
@@ -45,7 +46,12 @@
 			title: 'Features',
 			url: '/',
 			icon: Gift
-		}
+		},
+		{
+			title: 'Settings',
+			url: '/settings',
+			icon: Settings
+		},
 	];
 
 	const isActive = (url: string) => url === page.url.pathname;

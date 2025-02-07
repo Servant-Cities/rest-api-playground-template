@@ -46,7 +46,7 @@
 						- It is technicaly possible to overide a resource's id, which you should normaly avoid
 					</li>
 					<li>- Creating resources using PUT is not supported</li>
-					<li>- If you activated authentication, you need to send an Authorization header: 'Bearer your-secret'</li>
+					<li>- If authentication is activated, you need to send an Authorization header: 'Bearer your-secret'</li>
 				</ul>
 			</Alert.Description>
 		</Alert.Root>
