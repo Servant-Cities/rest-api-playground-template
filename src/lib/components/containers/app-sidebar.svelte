@@ -3,6 +3,7 @@
 	import ClipboardList from 'lucide-svelte/icons/clipboard-list';
 	import Library from 'lucide-svelte/icons/library';
 	import LogOut from 'lucide-svelte/icons/log-out';
+	import Info from 'lucide-svelte/icons/info';
 	import Settings from 'lucide-svelte/icons/settings';
 	import MonitorCheck from 'lucide-svelte/icons/monitor-check';
 	import CloudDownload from 'lucide-svelte/icons/cloud-download';
@@ -11,7 +12,7 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
-	let { tenant }: { tenant: {name: string} } = $props();
+	let { tenant }: { tenant: { name: string } } = $props();
 
 	const mainItems = [
 		{
@@ -43,6 +44,11 @@
 			icon: CloudDownload
 		},
 		{
+			title: 'Info',
+			url: '/info',
+			icon: Info
+		},
+		{
 			title: 'Features',
 			url: '/',
 			icon: Gift
@@ -51,7 +57,7 @@
 			title: 'Settings',
 			url: '/settings',
 			icon: Settings
-		},
+		}
 	];
 
 	const isActive = (url: string) => url === page.url.pathname;
