@@ -7,7 +7,6 @@ export const getDB = (db: string) => {
 	try {
 		if (!fs.existsSync(`./databases/${db}`)) {
 			const defaultData = fs.readFileSync('./databases/tutorial-db.json', 'utf8');
-			console.log(defaultData)
 			fs.writeFileSync(`./databases/${db}`, defaultData)
 		}
 	} catch (err) {

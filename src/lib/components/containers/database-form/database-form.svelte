@@ -35,10 +35,6 @@
 		link.click();
 		document.body.removeChild(link);
 	}
-
-	if (form.valid) {
-		console.log(form);
-	}
 </script>
 
 <form method="POST" use:enhance class="w-full">

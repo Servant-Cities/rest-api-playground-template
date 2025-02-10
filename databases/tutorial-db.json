@@ -136,16 +136,17 @@
             "value": {
                 "processor": "The organisation or person processing the data.",
                 "processor-url": "Link to the processor's website or terms",
-                "host": "What company manages the infrastructure where the service is hosted. Usefull to inform in the event of extra-territorial jurisdiction.",
+                "host": "What company manages the infrastructure where the service is hosted.",
                 "host-url": "Link to the host's website, terms or security information."
             }
         },
+        "require-authentication": {
+            "description": "Wether the app should require authentication or not, this let you protect your datasets online. Make sure you have access to the master DB's secret or file in order not to lock you out.",
+            "value": false
+        },
         "self-service-keys": {
-            "description": "(Not implemented yet) Will display a form on /new, users can file a name and a secret in order to create their own databases. Set a number of days after which the database is permanently destroyed or 0 to keep it forever. This software is intended for testing purpose, do not store personnal or critical data.",
-            "value": {
-                "active": false,
-                "delete-after": 90
-            }
+            "description": "(activate authentication first) Will display a form on /new, users can file a name and a secret in order to create their own databases. This software is intended for testing purpose, do not store personnal or critical data.",
+            "value": false
         },
         "authorized-keys": {
             "description": "A secret is used to grant access, the name is logged and displayed in the UI, you can set the same database for different keys or use different ones for multi-tenant but authorized keys will always be read from admin-db.json.",
@@ -156,10 +157,6 @@
                     "db": "master-db.json"
                 }
             ]
-        },
-        "require-authentication": {
-            "description": "Wether the app should require authentication or not, this let you protect your datasets online. Make sure you have access to the master DB's secret or file in order not to lock you out.",
-            "value": false
         }
     }
 }

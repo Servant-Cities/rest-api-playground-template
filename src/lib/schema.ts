@@ -4,12 +4,8 @@ import { z } from 'zod';
 export const authorizedKeySchema = z.object({
 	name: z.string(),
 	secret: z.string(),
-	db: z.string()
-});
-
-export const selfServiceKeysSchema = z.object({
-	active: z.boolean(),
-	'delete-after': z.number()
+	db: z.string(),
+	'last-used': z.string().optional()
 });
 
 export const informationNoticeSchema = z.object({
@@ -41,9 +37,9 @@ export const applicationSettingsSchema = z
 		'active-dataset': configurationItemSchema(z.string),
 		'saved-previews': configurationItemSchema(() => z.array(savedPreviewSchema)),
 		'information-notice': configurationItemSchema(() => informationNoticeSchema).optional().or(z.undefined()),
-		'self-service-keys': configurationItemSchema(() => selfServiceKeysSchema).optional().or(z.undefined()),
-		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional().or(z.undefined()),
-		'require-authentication': configurationItemSchema(z.boolean).optional().or(z.undefined())
+		'require-authentication': configurationItemSchema(z.boolean).optional().or(z.undefined()),
+		'self-service-keys': configurationItemSchema(z.boolean).optional().or(z.undefined()),
+		'authorized-keys': configurationItemSchema(() => z.array(authorizedKeySchema)).optional().or(z.undefined())
 	})
 	.required();
 export type ConfigurationItemSchema = typeof configurationItemSchema;

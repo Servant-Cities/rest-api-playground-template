@@ -4,12 +4,12 @@ import { masterDB } from '$lib/server/database';
 
 export const actions = {
 	'login': async ({ request, cookies }) => {
-		const authorizedKeys = await masterDB.getData('/application-settings/authorized-keys');
+		const authorizedKeys = await masterDB.getData('/application-settings/authorized-keys/value');
 		const formData = await request.formData();
 		const formSecret = formData.get('secret');
 
 		const access = authorizedKeySchema.safeParse(
-			authorizedKeys?.value.find(({ secret }) => secret === formSecret)
+			authorizedKeys.find(({ secret }) => secret === formSecret)
 		);
 
 		if (access.success) {

@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
+import { randomUUID } from 'crypto';
 import type { RequestHandler } from './$types';
-import { v4 as uuidv4 } from 'uuid';
 
 export const GET: RequestHandler = async ({ params, locals }) => {
     try {
@@ -18,7 +18,7 @@ export const POST: RequestHandler = async ({ request, params, locals }) => {
         const { resource } = params;
 		const activeDataset = await locals.db.getData('/application-settings/active-dataset/value')
         const newData = await request.json();
-        const id = uuidv4();
+        const id = randomUUID();
         await locals.db.push(`/datasets/${activeDataset}/${resource}/${id}`, { id, ...newData });
         return json({ message: 'Resource created', id }, { status: 201 });
     } catch (error) {
