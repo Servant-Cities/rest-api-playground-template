@@ -15,7 +15,7 @@
 		<h2 class="text-md absolute left-8 top-8 font-mono text-white">
 			Carefully built by Servant Cities
 		</h2>
-		<span class="text-sm absolute right-8 bottom-4">
+		<span class="text-sm absolute right-8 bottom-4 text-white">
 			The service is deployed on 
 			<a href="{hostURL}" target="_blank" class="underline">
 				{host}
