@@ -18,6 +18,7 @@
 	let searchQuery = $state(search);
 
 	const filterPreviews = () => {
+		console.log(savedPreviews)
 		filteredPreviews = savedPreviews.filter(
 			({ name, url }) => name.includes(searchQuery) || url.includes(searchQuery)
 		);
@@ -42,7 +43,7 @@
 	};
 
 	onMount(async () => {
-		const savedPreviewsResponse = await getDatabaseProperty('/application-settings/saved-previews/value');
+		const savedPreviewsResponse = await getDatabaseProperty('application-settings/saved-previews/value');
 		savedPreviews = await savedPreviewsResponse.json();
 	});
 </script>
