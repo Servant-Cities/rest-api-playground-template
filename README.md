@@ -6,7 +6,7 @@ It comes with a JSON editor which you can use to overide the database.
 
 This project is initally intended to create and improve different datasets for differents use case scenario by mocking the behavior of an headless CMS or API protocol and preview how different frontends react to each datasets.
 
-See Roadmap
+You can create a database using [our online demo](https://demo-rest-playground.servantcities.eu/new) to quickly test it with limited privileges or try [deploying your own instance](https://github.com/Servant-Cities/rest-api-playground-template?tab=readme-ov-file#deploying)
 
 ## Use locally
 
