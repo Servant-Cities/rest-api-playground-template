@@ -6,7 +6,7 @@
 	import Searchable from './searchable.svelte';
 
 	const apiDocUrl = `${page.url.protocol}//${page.url.host}/api`;
-	const defaultPreviewURL = `${page.url.protocol}//${page.url.host}/collections`;
+	const defaultPreviewURL = ``;
 	let preview: SavedPreviewSchema | Pick<SavedPreviewSchema, 'url'> = $state({
 		url: defaultPreviewURL
 	});
@@ -20,9 +20,7 @@
 	class="flex-column overflow-hidden rounded-md border border-solid border-black bg-black text-white"
 >
 	<Searchable search={preview.url} {onSubmit} />
-	{#if preview.url}
-		<IframeControler {preview} />
-	{/if}
+	<IframeControler {preview} />
 </div>
 <Alert.Root class="mt-2">
 	<Alert.Title>How do I load data in my app ?</Alert.Title>

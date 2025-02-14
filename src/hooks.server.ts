@@ -2,7 +2,27 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { masterDB, getDB } from '$lib/server/database';
 import { authorizedKeySchema } from '$lib/schema';
 
+const enhanceResolve: Handle = async ({ event, resolve }) => {
+	const response = await resolve(event);
+	if (event.url.pathname.startsWith('/api/REST/')) {
+		response.headers.append('Access-Control-Allow-Origin', `*`);
+	}
+	return response;
+};
+
 export const handle: Handle = async ({ event, resolve }) => {
+	if (event.url.pathname.startsWith('/api/REST/')) {
+		if (event.request.method === 'OPTIONS') {
+			return new Response(null, {
+				headers: {
+					'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Headers': '*'
+				}
+			});
+		}
+	}
+
 	const selfService = await masterDB.getData('/application-settings/self-service-keys/value');
 	if (selfService) {
 		if (event.url.pathname === '/new') return resolve(event);
@@ -19,7 +39,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const { secret, ...tenant } = authorizedKeys[0];
 		event.locals.tenant = tenant;
 		if (event.url.pathname === '/login') throw redirect(307, '/');
-		return await resolve(event);
+		return await enhanceResolve({ event, resolve });
 	}
 
 	let requestSecret = event.cookies.get('secret') || event.request.headers.get('Authorization');
@@ -64,7 +84,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				`${access.data.name} requested ${new URL(event.request.url).pathname} at ${time}`
 			);
 
-			return await resolve(event);
+			return await enhanceResolve({ event, resolve });
 		}
 		throw redirect(307, '/login?/disconnect');
 	}

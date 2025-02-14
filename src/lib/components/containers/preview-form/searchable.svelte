@@ -18,7 +18,6 @@
 	let searchQuery = $state(search);
 
 	const filterPreviews = () => {
-		console.log(savedPreviews)
 		filteredPreviews = savedPreviews.filter(
 			({ name, url }) => name.includes(searchQuery) || url.includes(searchQuery)
 		);
@@ -27,7 +26,7 @@
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
 		filteredPreviews = [];
-		onSubmit({ url: searchQuery });
+		onSubmit({ url: searchQuery, pathsMap: { '/api/*': '/api/REST/' } });
 	};
 
 	const selectPreview = (preview: SavedPreviewSchema) => {
@@ -43,8 +42,12 @@
 	};
 
 	onMount(async () => {
-		const savedPreviewsResponse = await getDatabaseProperty('application-settings/saved-previews/value');
-		savedPreviews = await savedPreviewsResponse.json();
+		const savedPreviewsResponse = await getDatabaseProperty(
+			'application-settings/saved-previews/value'
+		);
+		const previews = await savedPreviewsResponse.json();
+		savedPreviews = previews;
+		filteredPreviews = previews;
 	});
 </script>
 
@@ -60,10 +63,10 @@
 		<Button type="submit" variant="outline" class="bg-black text-white">Load</Button>
 	</div>
 	{#if filteredPreviews.length > 0}
-		<ul class="rounded border mt-1">
+		<ul class="mt-1 rounded border">
 			{#each filteredPreviews as preview}
 				<li
-					class="cursor-pointer p-2 hover:bg-gray-200 focus:bg-gray-300 hover:text-black"
+					class="cursor-pointer p-2 hover:bg-gray-200 hover:text-black focus:bg-gray-300"
 					onclick={() => selectPreview(preview)}
 					onkeydown={createKeydownHandler(preview)}
 				>

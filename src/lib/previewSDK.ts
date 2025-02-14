@@ -1,89 +1,111 @@
-import type { SavedPreviewSchema } from '$lib/schema';
-
 let messageHandler: (event: MessageEvent) => void;
 
-export const getRerouteURL = (url: string, pathsMap: Record<string, string>): string => {
-	let rerouteURL = url;
-	let urlPath: string;
-	try {
-		urlPath = new URL(url).pathname;
-	} catch {
-		urlPath = url.startsWith('/') ? url : '/' + url;
-	}
+export const getRerouteURL = (
+  url: string,
+  origin: string,
+  pathsMap: Record<string, string>
+): string => {
+  let rerouteURL = url;
+  let urlPath: string;
+  console.log(JSON.stringify({ url, origin, pathsMap }));
 
-	const matcher = Object.keys(pathsMap).find((pathToMatch) => {
-		const routePattern = new RegExp('^' + pathToMatch.replace(/\*/g, '.*') + '$');
-		return routePattern.test(urlPath);
-	});
+  try {
+    urlPath = new URL(url).pathname;
+  } catch {
+    urlPath = url.startsWith("/") ? url : "";
+  }
 
-	if (matcher) {
-		const newPath = pathsMap[matcher];
-		if (newPath !== 'SKIP') {
-			try {
-				const parsedUrl = new URL(url);
-				parsedUrl.pathname = newPath.replace(/\*/g, urlPath);
-				rerouteURL = parsedUrl.toString();
-			} catch {
-				rerouteURL = url.replace(urlPath, newPath.replace(/\*/g, urlPath));
-			}
-		}
-	}
+  const matcher = Object.keys(pathsMap).find(pathToMatch => {
+    const routePattern = new RegExp(
+      "^" + pathToMatch.replace(/\*/g, ".*") + "$"
+    );
+    return routePattern.test(urlPath);
+  });
 
-	console.log(`Using override fetch to reroute ${url} to ${rerouteURL}`);
-	return rerouteURL;
+  if (matcher) {
+    const newPath = pathsMap[matcher];
+    if (newPath !== "SKIP") {
+      rerouteURL = `${origin}${newPath.replace(/\*/g, "")}${urlPath.replace(/^\/api\//, "")}`;
+    }
+  }
+
+  console.log(`Using override fetch to reroute ${url} to ${rerouteURL}`);
+  return rerouteURL;
 };
 
 export interface Params {
-	initialFetch: typeof fetch;
-	pathsMap: SavedPreviewSchema['pathsMap'];
-	secret: string;
+  origin: string;
+  initialFetch: typeof fetch;
+  pathsMap: Record<string, string>;
+  secret: string;
 }
 
-export type FetchOverrideCreator = ({ initialFetch, pathsMap, secret }: Params) => typeof fetch;
+export type FetchOverrideCreator = ({
+  origin,
+  initialFetch,
+  pathsMap,
+  secret,
+}: Params) => typeof fetch;
 
 export const createFetchOverride: FetchOverrideCreator =
-	({ initialFetch, pathsMap, secret }) =>
-	async (...args) => {
-		let [firstArg, ...otherArgs] = [...args];
-		const url = typeof firstArg === 'string' ? firstArg : firstArg.url;
+  ({ origin, initialFetch, pathsMap, secret }) =>
+  async (...args) => {
+    let [firstArg, ...otherArgs] = [...args];
+    const url = typeof firstArg === "string" ? firstArg : firstArg.url;
 
-		if (url) {
-			const reroute = getRerouteURL(url, pathsMap);
-			const init = (typeof firstArg === 'string' ? otherArgs[0] : firstArg) || {};
+    if (url) {
+      const reroute = getRerouteURL(url, origin, pathsMap);
+      const init =
+        (typeof firstArg === "string" ? otherArgs[0] : firstArg) || {};
 
-			const modifiedInit = {
-				...init,
-				headers: {
-					...init.headers,
-					Authorization: `Bearer ${secret}`
-				}
-			};
+      const modifiedInit = {
+        ...init,
+        headers: {
+          ...init.headers,
+          Authorization: `Bearer ${secret}`,
+        },
+      };
 
-			try {
-				return fetch(reroute, typeof firstArg === 'string' ? modifiedInit : [firstArg, ...otherArgs]);
-			} catch (err) {
-				console.error(err);
-			}
-		}
+      try {
+        return initialFetch(
+          reroute,
+          typeof firstArg === "string" ? modifiedInit : [firstArg, ...otherArgs]
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
-		console.log(`Using iframe fetch for: ${url}`);
-		return initialFetch(...args);
-	};
+    console.log(`Using iframe fetch for: ${url}`);
+    return initialFetch(...args);
+  };
 
-export const createMessageHandler = (origin: string) =>
-	(messageHandler = (event: MessageEvent) => {
-		if (event.origin !== origin) return;
-		if (event.data.type === 'REQUEST_PREVIEW_SDK') {
-			const { preview: {pathsMap} } = event.data;
-			const iFrameFetch = window.fetch;
-			window.fetch = createFetchOverride({ initialFetch: iFrameFetch, pathsMap, secret: '' });
-		}
-	});
+export const createMessageHandler = (
+  origin: string,
+  refresh: () => Promise<void>
+) => {
+  messageHandler = async (event: MessageEvent) => {
+    if (event.data.type === "REQUEST_PREVIEW_SDK") {
+      const { preview, secret } = event.data;
+      const { pathsMap } = JSON.parse(preview);
+      const iFrameFetch = window.fetch;
+      window.fetch = createFetchOverride({
+        origin: event.origin,
+        initialFetch: iFrameFetch,
+        pathsMap,
+        secret,
+      });
+      return await refresh();
+    }
+  };
+};
 
-export const accept = (origin: string) => {
-	window.addEventListener('message', createMessageHandler(origin));
+export const accept = (origin: string, refresh: () => void) => {
+  createMessageHandler(origin, refresh);
+  window.addEventListener("message", messageHandler);
+  console.log("accepted : ", origin);
 };
 
 export const revoke = () => {
-	window.addEventListener('message', messageHandler);
+  window.removeEventListener("message", messageHandler);
 };
