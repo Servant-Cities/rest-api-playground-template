@@ -77,6 +77,8 @@ If authentication is activated, you will also need to send the Authorization hea
 
 (Safe) Don't forget to update the authorized origin in the sdk and add any verification logic you deem necessary. Authorizing localhost origin or forwarding services such as ngrok would indeed result in a cross site scripting vulnerability.
 
+Here is a [working example](https://github.com/Servant-Cities/protocol-api-tester/blob/main/src/routes/%2Bpage.svelte)
+
 The other way to connect the app is trough the playground's rest API.
 
 You can manualy update your sdk to reformat requests data to match the playground API if you need to, feel free to use the preview parameters to react to playground-specific configuration.
